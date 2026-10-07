@@ -1,0 +1,16 @@
+{
+  "id": "com.mimi.procedural-terrain",
+  "name": "Procedural Terrain / 程序化地形",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "百变",
+      "url": "https://github.com/Baibian0727"
+    }
+  ],
+  "description": "Procedural terrain tools for Maker Studio using the vanilla Pokémon Essentials Outside tileset: grass, cliffs, stacked heights, water, roads and fences.",
+  "tags": ["mapping", "terrain", "tiles", "pokemon-essentials"],
+  "apiVersion": "1.0.0",
+  "main": "index.js",
+  "permissions": ["ui.toasts"]
+}
