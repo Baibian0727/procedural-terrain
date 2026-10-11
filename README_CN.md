@@ -1,11 +1,11 @@
 # Procedural Terrain / 程序化地形
 
-这是一个面向 **Maker Studio** 的程序化地形绘制 MOD，目前针对 **Pokémon Essentials 原生 `Outside` 图块组**。
+这是一个面向 **Maker Studio** 的程序化地形绘制 MOD。内置模板使用 **Pokémon Essentials 原生 `Outside` 图块组**；部分地形也可通过图块教学适配其他普通图块布局。
 
-作者：**百变**  
+作者：**千面之途**  
 GitHub：**Baibian0727**  
 Mod ID：`com.mimi.procedural-terrain`  
-版本：**1.0.0**
+版本：**1.1.0**
 
 ## 功能
 
@@ -32,13 +32,15 @@ Mod ID：`com.mimi.procedural-terrain`
 - 使用 Maker Studio 原生撤销记录，`Ctrl+Z` 可整笔撤销
 - 预览期间按 `Esc` 取消当前这一笔
 
+1.1.0 还加入草地山体、可设置层数的多层山体、高松林、圆冠林、正交绘图和窗口内图块教学。每个教学位置可以指定自己的图块 ID 与绘制图层，同一图块集和地形类型也可以保存多套式样。详情见[中英双语更新说明](RELEASE_NOTES.md)。
+
 ## 兼容性
 
 **当前只核对并测试 Maker Studio 1.7.1。**
 
 为了避免跨层撤销或地图数据损坏，本版本在检测到 Maker Studio 不是 1.7.1 时会主动停止绘图，而不是勉强运行。
 
-山体、水坑、道路、栅栏等程序化模板目前按 **Pokémon Essentials 原生 `Outside` Tileset** 的图块排列编写，不是任意 Tileset 通用生成器。
+内置模板按 **Pokémon Essentials 原生 `Outside` Tileset** 的图块排列编写。受支持的地形类型可以通过教学映射到其他普通图块布局；水坑和栅栏仍使用内置 Outside 布局。
 
 ## 手动安装
 
@@ -56,7 +58,9 @@ com.mimi.procedural-terrain/
 ├─ index.js
 ├─ README.md
 ├─ README_CN.md
-└─ CHANGELOG.md
+├─ CHANGELOG.md
+├─ RELEASE_NOTES.md
+└─ PUBLISHING.md
 ```
 
 重新打开项目或重载 Maker Studio 后，在 Mods 中打开：
@@ -65,8 +69,8 @@ com.mimi.procedural-terrain/
 
 ## 使用原则
 
-程序会先生成实时预览，只有松开鼠标后才正式写入地图。遇到不支持或可能破坏现有地形的位置会标记冲突并阻止整笔提交，以降低误改地图的风险。
+程序会先生成实时预览，只有松开鼠标后才正式写入地图。冲突位置标红并跳过，其余有效位置继续绘制。提交的一笔仍对应一次原生撤销。
 
 ## 素材说明
 
-本 MOD 不包含任何 Pokémon / Essentials 图块图片。它只对用户自己的工程地图进行编辑，并依据 Essentials 原生 `Outside` 图块布局工作。
+本 MOD 不包含任何 Pokémon / Essentials 图块图片。它只对用户自己的工程地图进行编辑。以后发布新版本的操作见 [PUBLISHING.md](PUBLISHING.md)。

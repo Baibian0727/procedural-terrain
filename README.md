@@ -1,11 +1,11 @@
 # Procedural Terrain / 程序化地形
 
-A Maker Studio mod for drawing terrain procedurally with the **vanilla Pokémon Essentials `Outside` tileset**.
+A Maker Studio mod for brush-based terrain drawing, with built-in templates for the vanilla Pokémon Essentials `Outside` tileset and reusable teaching profiles for other regular-tile layouts.
 
-Author: **百变**  
+Author: **千面之途**  
 GitHub: **Baibian0727**  
 Mod ID: `com.mimi.procedural-terrain`  
-Version: **1.0.0**
+Version: **1.1.0**
 
 ## What it does
 
@@ -30,13 +30,15 @@ Procedural Terrain turns repetitive tile-by-tile terrain work into brush-based e
 - Whole-stroke undo through Maker Studio's native undo history
 - `Esc` to cancel the current preview before committing
 
+Version 1.1.0 also adds grass-topped cliffs, configurable multi-level cliffs, tall-pine and round-canopy forests, orthogonal drawing, and in-window tile teaching. Each teaching profile can specify tile IDs and output layers per role. Several profiles can coexist for one terrain type and tileset. See [the bilingual release notes](RELEASE_NOTES.md).
+
 ## Compatibility
 
 **Tested with Maker Studio 1.7.1.**
 
 This release intentionally refuses to draw on a different Maker Studio version because it relies on 1.7.1 host internals for safe cross-layer transactions and native undo behavior.
 
-The procedural terrain templates are currently designed for the **vanilla Pokémon Essentials `Outside` tileset layout**. The cliff/water/road/fence tools are not universal tileset generators and should not be used on unrelated tileset layouts.
+Built-in tile templates target the **vanilla Pokémon Essentials `Outside` tileset layout**. Teaching profiles can map supported terrain types to other regular-tile layouts. Water and fences still use their built-in Outside layouts.
 
 ## Install manually
 
@@ -56,7 +58,9 @@ com.mimi.procedural-terrain/
 ├─ index.js
 ├─ README.md
 ├─ README_CN.md
-└─ CHANGELOG.md
+├─ CHANGELOG.md
+├─ RELEASE_NOTES.md
+└─ PUBLISHING.md
 ```
 
 Restart/reload Maker Studio, then open **Procedural Terrain / 程序化地形** from the Mods panel.
@@ -69,4 +73,4 @@ The mod previews terrain first and commits the stroke only when the pointer is r
 
 This project does **not** bundle Pokémon graphics or tileset assets. It operates on the user's own project data and expects the standard Essentials `Outside` tile arrangement.
 
-The interface in v1.0.0 is primarily Chinese. English UI localization may be added later.
+The interface remains primarily Chinese. The release workflow and future update steps are documented in [PUBLISHING.md](PUBLISHING.md).
