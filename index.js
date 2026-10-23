@@ -1,42 +1,52 @@
+import {EN,ES} from './i18n.js';
+// 界面文本以中文原文为键；按编辑器语言取英文或西班牙文（zh 显示原文，其余语言回退英文）。
+// N() 只标记模块加载时的文本，显示处再用 T() 翻译；T() 对非键文本原样返回，可重复套用。
+const N=s=>s;
+function T(s,vars){
+ const locale=String(ctxRef?.i18n?.getLocale?.()||'en').toLowerCase(),dict=locale.startsWith('zh')?null:locale.startsWith('es')?ES:EN;
+ let r=dict?.[s]??s;
+ if(vars)r=r.replace(/\{(\w+)\}/g,(m,k)=>k in vars?String(typeof vars[k]==='string'?dict?.[vars[k]]??vars[k]:vars[k]):m);
+ return r;
+}
 const ROAD_TEACHING_ROLES = [
- ['ground','背景地面',385,0],['center','路面中心',546,0],
- ['nw','左上外角',537,0],['n','上边',538,0],['ne','右上外角',539,0],
- ['w','左边',545,0],['e','右边',547,0],['sw','左下外角',553,0],['s','下边',554,0],['se','右下外角',555,0],
- ['inNW','内角 · 缺左上',558,0],['inNE','内角 · 缺右上',556,0],['inSW','内角 · 缺左下',542,0],['inSE','内角 · 缺右下',540,0]
+ ['ground',N("背景地面"),385,0],['center',N("路面中心"),546,0],
+ ['nw',N("左上外角"),537,0],['n',N("上边"),538,0],['ne',N("右上外角"),539,0],
+ ['w',N("左边"),545,0],['e',N("右边"),547,0],['sw',N("左下外角"),553,0],['s',N("下边"),554,0],['se',N("右下外角"),555,0],
+ ['inNW',N("内角 · 缺左上"),558,0],['inNE',N("内角 · 缺右上"),556,0],['inSW',N("内角 · 缺左下"),542,0],['inSE',N("内角 · 缺右下"),540,0]
 ];
 const PINE_TEACHING_ROLES = [
- ['ground','背景地面',385,0],
- ['capL','树冠顶 · 左',804,2],['capR','树冠顶 · 右',805,2],
- ['singleMidL','单棵树身 · 左',812,1],['singleMidR','单棵树身 · 右',813,1],
- ['singleFootL','单棵树底 · 左',820,1],['singleFootR','单棵树底 · 右',821,1],
- ['midAL','连片树身 A · 左',808,0],['midAR','连片树身 A · 右',809,0],
- ['midBL','连片树身 B · 左',810,0],['midBR','连片树身 B · 右',811,0],
- ['joinAL','上下连接 A · 左',800,0],['joinAR','上下连接 A · 右',801,0],
- ['joinBL','上下连接 B · 左',802,0],['joinBR','上下连接 B · 右',803,0],
- ['footAL','连片树底 A · 左',816,0],['footAR','连片树底 A · 右',817,0],
- ['footBL','连片树底 B · 左',818,0],['footBR','连片树底 B · 右',819,0]
+ ['ground',N("背景地面"),385,0],
+ ['capL',N("树冠顶 · 左"),804,2],['capR',N("树冠顶 · 右"),805,2],
+ ['singleMidL',N("单棵树身 · 左"),812,1],['singleMidR',N("单棵树身 · 右"),813,1],
+ ['singleFootL',N("单棵树底 · 左"),820,1],['singleFootR',N("单棵树底 · 右"),821,1],
+ ['midAL',N("连片树身 A · 左"),808,0],['midAR',N("连片树身 A · 右"),809,0],
+ ['midBL',N("连片树身 B · 左"),810,0],['midBR',N("连片树身 B · 右"),811,0],
+ ['joinAL',N("上下连接 A · 左"),800,0],['joinAR',N("上下连接 A · 右"),801,0],
+ ['joinBL',N("上下连接 B · 左"),802,0],['joinBR',N("上下连接 B · 右"),803,0],
+ ['footAL',N("连片树底 A · 左"),816,0],['footAR',N("连片树底 A · 右"),817,0],
+ ['footBL',N("连片树底 B · 左"),818,0],['footBR',N("连片树底 B · 右"),819,0]
 ];
 const ROUND_TEACHING_ROLES = [
- ['ground','背景地面',386,0],
- ['capTip','树冠尖顶',849,2],
- ['capL','树冠下沿 · 左',856,2],['capM','树冠下沿 · 中',857,2],['capR','树冠下沿 · 右',858,2],
- ['bodyUL','连片树身上排 · 左',864,0],['bodyUM','连片树身上排 · 中',865,0],['bodyUR','连片树身上排 · 右',866,0],
- ['bodyDL','连片树身下排 · 左',872,0],['bodyDM','连片树身下排 · 中',873,0],['bodyDR','连片树身下排 · 右',874,0],
- ['footUL','树底上排 · 左',880,0],['footUM','树底上排 · 中',881,0],['footUR','树底上排 · 右',882,0],
- ['footDL','树底下排 · 左',888,0],['footDM','树底下排 · 中',889,0],['footDR','树底下排 · 右',890,0]
+ ['ground',N("背景地面"),386,0],
+ ['capTip',N("树冠尖顶"),849,2],
+ ['capL',N("树冠下沿 · 左"),856,2],['capM',N("树冠下沿 · 中"),857,2],['capR',N("树冠下沿 · 右"),858,2],
+ ['bodyUL',N("连片树身上排 · 左"),864,0],['bodyUM',N("连片树身上排 · 中"),865,0],['bodyUR',N("连片树身上排 · 右"),866,0],
+ ['bodyDL',N("连片树身下排 · 左"),872,0],['bodyDM',N("连片树身下排 · 中"),873,0],['bodyDR',N("连片树身下排 · 右"),874,0],
+ ['footUL',N("树底上排 · 左"),880,0],['footUM',N("树底上排 · 中"),881,0],['footUR',N("树底上排 · 右"),882,0],
+ ['footDL',N("树底下排 · 左"),888,0],['footDM',N("树底下排 · 中"),889,0],['footDR',N("树底下排 · 右"),890,0]
 ];
 const MULTI_TEACHING_ROLES = [
- ['ground','背景地面',385,0],['rock','岩石台面 / 岩壁底图',1177,0],
- ['nw','左上外角',1168,1],['n','上沿 / 内凹顶缘',1169,1],['ne','右上外角',1170,1],
- ['w','左侧岩壁',1176,1],['e','右侧岩壁',1178,1],
- ['sw','左下外角',1184,1],['s','下侧岩壁',1185,1],['se','右下外角',1186,1],
- ['inSW','内角 · 缺左下',1193,1],['inSE','内角 · 缺右下',1192,1]
+ ['ground',N("背景地面"),385,0],['rock',N("岩石台面 / 岩壁底图"),1177,0],
+ ['nw',N("左上外角"),1168,1],['n',N("上沿 / 内凹顶缘"),1169,1],['ne',N("右上外角"),1170,1],
+ ['w',N("左侧岩壁"),1176,1],['e',N("右侧岩壁"),1178,1],
+ ['sw',N("左下外角"),1184,1],['s',N("下侧岩壁"),1185,1],['se',N("右下外角"),1186,1],
+ ['inSW',N("内角 · 缺左下"),1193,1],['inSE',N("内角 · 缺右下"),1192,1]
 ];
-const GRASS_MULTI_TEACHING_ROLES=MULTI_TEACHING_ROLES.map(([key,name,id,z])=>[key,key==='rock'?'草地台面 / 岩壁底图':key==='n'?'草地上沿 / 内凹顶缘':name,key==='rock'?388:key==='n'?1233:id,z]);
+const GRASS_MULTI_TEACHING_ROLES=MULTI_TEACHING_ROLES.map(([key,name,id,z])=>[key,key==='rock'?N("草地台面 / 岩壁底图"):key==='n'?N("草地上沿 / 内凹顶缘"):name,key==='rock'?388:key==='n'?1233:id,z]);
 const multiTeaching=kind=>kind==='multi-mountain'||kind==='grass-multi-mountain';
 const singleTeaching=kind=>kind==='single-mountain'||kind==='grass-single-mountain';
 const mountainTeaching=kind=>singleTeaching(kind)||multiTeaching(kind);
-const TEACHING_TYPES = [['single-mountain','山体（单层 / 高台 / 下挖）'],['grass-single-mountain','草地山体（单层 / 高台 / 下挖）'],['multi-mountain','多层山体'],['grass-multi-mountain','草地多层山体'],['road','道路'],['pine-forest','森林 · 高松林'],['round-forest','森林 · 圆冠林']];
+const TEACHING_TYPES = [['single-mountain',N("山体（单层 / 高台 / 下挖）")],['grass-single-mountain',N("草地山体（单层 / 高台 / 下挖）")],['multi-mountain',N("多层山体")],['grass-multi-mountain',N("草地多层山体")],['road',N("道路")],['pine-forest',N("森林 · 高松林")],['round-forest',N("森林 · 圆冠林")]];
 function teachingRoles(kind='single-mountain') {
  if(kind==='single-mountain')return TEACHING_ROLES;
  if(kind==='grass-single-mountain')return GRASS_SINGLE_TEACHING_ROLES;
@@ -45,7 +55,7 @@ function teachingRoles(kind='single-mountain') {
  if(kind==='round-forest')return ROUND_TEACHING_ROLES;
  if(kind==='multi-mountain')return MULTI_TEACHING_ROLES;
  if(kind==='grass-multi-mountain')return GRASS_MULTI_TEACHING_ROLES;
- throw Error('未知教学类型');
+ throw Error(T("未知教学类型"));
 }
 const teachingStorage = kind => kind==='single-mountain'?'single-mountain-teaching-v1:':`${kind}-teaching-v1:`;
 const teachingId=()=>globalThis.crypto?.randomUUID?.()||`teaching-${Date.now()}-${Math.random().toString(36).slice(2)}`;
@@ -54,26 +64,26 @@ function teachingLibraryKey(kind,project,atlas){
 }
 async function readTeachingLibrary(ctx,kind,project,atlas,legacyHash){
   const key=teachingLibraryKey(kind,project,atlas);
-  const raw=await teachingTimeout(ctx.storage.get(key,null),'读取教学式样列表');
+  const raw=await teachingTimeout(ctx.storage.get(key,null),T("读取教学式样列表"));
   if(raw){
-    if(raw.version!==2||!Array.isArray(raw.entries))throw Error('教学式样列表格式无效；原数据未修改');
+    if(raw.version!==2||!Array.isArray(raw.entries))throw Error(T("教学式样列表格式无效；原数据未修改"));
     const ids=new Set(),entries=raw.entries.map(entry=>{
-      if(typeof entry?.id!=='string'||!entry.id||ids.has(entry.id))throw Error('教学式样编号重复或无效；原数据未修改');
+      if(typeof entry?.id!=='string'||!entry.id||ids.has(entry.id))throw Error(T("教学式样编号重复或无效；原数据未修改"));
       ids.add(entry.id);
       return {id:entry.id,profile:validateTeachingProfile(entry.profile,atlas,kind)};
     });
     return {key,library:{version:2,selectedId:ids.has(raw.selectedId)?raw.selectedId:entries[0]?.id||null,entries},migrated:false};
   }
   const prefix=teachingStorage(kind)+encodeURIComponent(project)+'|'+atlas.tilesetId+'|';
-  let saved=await teachingTimeout(ctx.storage.get(prefix+atlas.fingerprint,null),'读取旧教学档案'),migrated=false;
+  let saved=await teachingTimeout(ctx.storage.get(prefix+atlas.fingerprint,null),T("读取旧教学档案")),migrated=false;
   if(!saved&&legacyHash){
-    saved=await teachingTimeout(ctx.storage.get(prefix+legacyHash,null),'读取旧教学档案');
+    saved=await teachingTimeout(ctx.storage.get(prefix+legacyHash,null),T("读取旧教学档案"));
     if(saved){saved=validateTeachingProfile(saved,{...atlas,fingerprint:legacyHash},kind);saved.atlas=atlas;migrated=true;}
   }
   const entries=saved?[{id:'legacy',profile:validateTeachingProfile(saved,atlas,kind)}]:[];
   return {key,library:{version:2,selectedId:entries[0]?.id||null,entries},migrated};
 }
-const teachingTypeName = kind => TEACHING_TYPES.find(([k])=>k===kind)?.[1]||kind;
+const teachingTypeName = kind => T(TEACHING_TYPES.find(([k])=>k===kind)?.[1]||kind);
 const teachingLayer = (kind,role) => singleTeaching(kind)?(role==='ground'||role==='rock'?0:1):teachingRoles(kind).find(([k])=>k===role)?.[3]??0;
 const placedLayer = (profile,role) => profile.roles[role]?.layer ?? teachingLayer(profile.kind,role);
 const relocatedTeaching = profile => teachingRoles(profile.kind).some(([role])=>placedLayer(profile,role)!==teachingLayer(profile.kind,role));
@@ -84,19 +94,19 @@ function teachingGrounds(profile,snapshot={}){
  return grounds;
 }
 function missingTeachingMessage(profile,keys){
- const names=[...new Set(keys)].map(key=>teachingRoles(profile.kind).find(([role])=>role===key)?.[1]||key);
- return `教学缺少“${names.join('、')}”映射，跳过此格`;
+ const names=[...new Set(keys)].map(key=>T(teachingRoles(profile.kind).find(([role])=>role===key)?.[1]||key));
+ return T("教学缺少“{v}”映射，跳过此格",{v:names.join(T('、'))});
 }
 function multiTeachingLayout(profile,shape,engines){
  const count=profile.previewLayers??2,isGrass=profile.kind==='grass-multi-mountain';
  const width=22+2*(count-1),height=18+count-1,top=new Set();
  for(const k of teachingMask(shape)){const[x,y]=k.split(',').map(Number);top.add(`${x+(shape==='border'?0:count-1)},${y}`);}
  const plan=engines.MultiMountain.geometry(top,width,height,count,isGrass),cells=[];
- if(plan.errors.size)throw Error('多层山体教学范例存在不支持的边角');
+ if(plan.errors.size)throw Error(T("多层山体教学范例存在不支持的边角"));
  const byId=new Map(teachingRoles(profile.kind).map(([role,,id])=>[id,role]));
  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
   const t=plan.cells.get(`${x},${y}`),role=t?(t.edge?byId.get(t.edge):'rock'):'ground';
-  if(!role)throw Error('未知多层山体边角');
+  if(!role)throw Error(T("未知多层山体边角"));
   const entry=profile.roles[role],auto=t&&(isGrass||t.solid)?'rock':'ground';
   const baseRole=materialRole(role)?role:entry.base==='auto'?auto:entry.base;
   const baseId=typeof baseRole==='number'?baseRole:profile.roles[baseRole].tile;
@@ -136,7 +146,7 @@ function extraTeachingLayout(profile,shape,engines) {
    plan=engines.Forest.plan(s,sites,{x:2,y:2},385,false);
   }
  }
- if(plan.conflicts.size)throw Error('教学范例存在不支持的位置');
+ if(plan.conflicts.size)throw Error(T("教学范例存在不支持的位置"));
  for(const c of plan.changes)arrays.get(c.layer)[c.y*width+c.x]=c.value;
  const roleOf=(z,id)=>roles.find(([, ,tile,layer])=>tile===id&&layer===z)?.[0];
  for(let y=0;y<height;y++)for(let x=0;x<width;x++){
@@ -150,18 +160,18 @@ function extraTeachingLayout(profile,shape,engines) {
 // Teaching is isolated from map writes. The existing single-mountain topology is
 // injected; only its semantic roles are translated to the taught tileset.
 const TEACHING_ROLES = [
-  ['ground', '背景草地', 385], ['rock', '山顶岩面', 1177],
-  ['nw', '左上外角', 1168], ['n', '上沿', 1169], ['ne', '右上外角', 1170],
-  ['w', '左岩壁', 1176], ['e', '右岩壁', 1178],
-  ['sw', '左下外角', 1184], ['s', '下岩壁', 1185], ['se', '右下外角', 1186],
-  ['inNW', '内角 · 缺左上', 1201], ['inNE', '内角 · 缺右上', 1200],
-  ['inSW', '内角 · 缺左下', 1193], ['inSE', '内角 · 缺右下', 1192]
+  ['ground', N("背景草地"), 385], ['rock', N("山顶岩面"), 1177],
+  ['nw', N("左上外角"), 1168], ['n', N("上沿"), 1169], ['ne', N("右上外角"), 1170],
+  ['w', N("左岩壁"), 1176], ['e', N("右岩壁"), 1178],
+  ['sw', N("左下外角"), 1184], ['s', N("下岩壁"), 1185], ['se', N("右下外角"), 1186],
+  ['inNW', N("内角 · 缺左上"), 1201], ['inNE', N("内角 · 缺右上"), 1200],
+  ['inSW', N("内角 · 缺左下"), 1193], ['inSE', N("内角 · 缺右下"), 1192]
 ];
-const GRASS_SINGLE_TEACHING_ROLES=TEACHING_ROLES.map(([key,name,id])=>[key,key==='rock'?'山顶草面':key==='n'?'草面上沿':name,key==='rock'?388:['n','inNW','inNE'].includes(key)?1313:id]);
-const MOUNTAIN_OPERATION_SHAPES=[['raised','叠加高台'],['expanded','扩展高台'],['digGround','一层下挖一层 · 地面坑底'],['digRock','二层下挖一层 · 台面坑底'],['digThrough','二层下挖两层 · 地面坑底']];
+const GRASS_SINGLE_TEACHING_ROLES=TEACHING_ROLES.map(([key,name,id])=>[key,key==='rock'?N("山顶草面"):key==='n'?N("草面上沿"):name,key==='rock'?388:['n','inNW','inNE'].includes(key)?1313:id]);
+const MOUNTAIN_OPERATION_SHAPES=[['raised',N("叠加高台")],['expanded',N("扩展高台")],['digGround',N("一层下挖一层 · 地面坑底")],['digRock',N("二层下挖一层 · 台面坑底")],['digThrough',N("二层下挖两层 · 地面坑底")]];
 const TEACHING_SHAPES = [
-  ['lesson', '标准范例'], ['rectangle', '长方形'], ['stairs', '阶梯形'],
-  ['notch', '内凹形'], ['border', '贴左边界']
+  ['lesson', N("标准范例")], ['rectangle', N("长方形")], ['stairs', N("阶梯形")],
+  ['notch', N("内凹形")], ['border', N("贴左边界")]
 ];
 const TEACHING_REFERENCE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACCAAAAAgCAYAAADJuZuxAAAeQElEQVR4nO2dIXQjR7aGNe8sMHTQeplYBBUmMwVFywYqaL3Mi54fWgdFQXHQc9AOdNAKDtSimI1YDL1M7JlloNm8c9R1e7b/1tWt6q7u6m79H/FRq7qq7q3q6pas/683N9uHT6OELLYv+7/j6UXh+O4pOy7g+xp4HoL1fDn/y5tRB/jX/U/7cXh+3h18/7/f/aMT/WyK725/2Me/e3zcvx6fnxXe33183f+dTSeF4y+7LF8X4/H+72QyrjVftPxbSD+wv8J4Pi+8/vHu+zeH4h89bQ+fD/lAQuPXrhOJX+rR8K0f69Ouc6tdHBccdzxeYjo7eHh+ceY1/tun56Pj0Pn55/o9X8wL/dPab3v8U7X/7vhl1ThzF/4Y5vHOjaf8zcvDOiLvVz3/4jxbb1Jx9+J3nZBmWRjDMN5lE/X8+GWZnI9uuu/GxwPavAwz/qHlv695t/Ig8d9eHP+8MnT+OP77oD/X1OVy+cX+c8Hq4bZwfPVuvf+7mE/3fzePT9nx6+XR+uQ8LIfHt8/Z8+5sMqnU7urqbv/3w/r3NyFxjmZwoW/dhYTH8X1gcfu28Fr6Kf3W0Mpt7t4fPsHqlxKP5OV/tr/s4356ydaB6UW2Xsjr13WWx76O/9my2G+MT15rbO9veh3/7Ob+aH/Wz9nz93iT1Xsq83+3yPI1cTd2meenEr/MC47/aY9/av53lvb7b7n/xWa7PZxfWadxHcd1vmnk/oL3D+kXMptl98HYyPojjN+/2/9drK4Kx6WfgpU3ic/3OrPqCR0f6zzMv7Uu+NYjlNaP1cP+7+7tdeG43P+EZ/ng6Bh/VL6fc5+LQ1nd3XR7/t9WXBeVz9m781lYvjn/OzH/1XnvO/+t92W+GOXOXrI45tOsn49Px/8/g+VeL56i9GNkfJ9mvS/XAeb71oVj/V9OWCxnB8tVPf+/jvaaEEIIIYQQQgghhBBCCCGEEEIIIcSDN7EdEC7Os19CvHz0+4XWdVGoW6KqE4J2PvLNTbsKnJ+v/1bItyhzp/PDCu2nx20lhTg6JlgOC9p5qR0QNOcDRMuLNl+0X+7g+4+bx+Jxoz+iREcFet4fp0DWHBAk/rw85AEV+Ki8twhV2Eu9lpLcV9GP/bTex3Kaw4HmhGA5UYgDQuzrD/Ok/SKsqetfHBuEq+XiYLm2xz+UpuffZna4Hl+FViwHBASdC9DhwML3/Nn0pdcOCKicRmW1VR7p2/lWeV/67gDgq7wX6IDQjfz3fd7Vzcd0RAeEdkak31zef/XpmGJJU3ALUl5ThlnHNaUY1ivlPtz8VmlccyeEvIE4ilhTIaspXCMpXgV0hPj6ffa5HNGUcH0Zf0t5JmjP1/j8LYrWvsTvq1iVOHPllzghDHT+o/MBjr84Xgw1flS+c/xPe/xTMxQHhNzxAJS4K3HWCLxPNKXA19pTnXnAQWgk979Ijgi5Awsov7X7Gjr/aM4BVty+jkXa+b55tUAnAN/6BSsvpTyCElzug6bzga/jAZQb3Pz3/H4By2nPo/lzF+f/wXHRxi32/Bded4cdYD4PZMXvSyqehw4Iu+fj/7AeT87CHBA0fOd54Hln4+VBBwTE9/9yGr7n0wGBEEIIIYQQQgghhBBCCCGEEEIIIbX5Q1tOB6HlBVQQW8p1RFMOhzop1EUcCCaj44pn4aP7ZZaUw/6ewy+HsL6fR5nTAsZt5UHOEwX1P7e/Jv2FbFXnA2GzLv6S0FJQW4gDgeQHHQmwnOaEII4H6IQQ6nzgi6ZEtxwF8LyH9Sbrzybrz3wxP9qe1K/Vh+1jeUTLh3WehnYd1r3+1spebjhfm2p/5Nq3rn90+Ghq/LGc9FfixOsVHRzqtq/F8+TS4et0ENsZ4VGr5qI4TsE+Ep7nH78LVUeGNbZy2VJMW+/Xrb9r58dyRLAU6aLk9lWkNzX+ddHyEzv+1PQt/6cSf1ukjj91+0NBHAFW16AEcoiyRBQn2h7CgqZkspTfFnK+/L3cZv1Gxb+FlC85IVjK17wjfspYU/FqtaOVV/pp5QEVcIIo4lcP/Rr/1VVxT/dXp+jDvUit52lRRPcv/puC4tn6/itX5DmHgJITQs/nPzofqNW4fJWU8D2P/wyVnCc+/tr1fqrjT+Igim9U7IYqv/F4LAU+1id/pV/YT3QksO5vsdAU7Hg/tJwQEO1+aintLQW+r0LfiqtqHJbyuzKByu3Bz//b+7C8VVSSc/63O/9zJ4qOOB8kZ1dx/hrnSZ7lOUxzgB7B8eD/P3ieTwcEQgghhBBCCCGEEEIIIYQQQgghhKRzQJBfcuMvu/EX3lWdD7Q9vfF46F7gi2VTms/D/HydOQos58f3OhIlMCqbtbim82I5VBJLnOgAsFT2XJK95jE/346+/tQFJwRBU1T7Kv5DnQ9EOY1KfcuhoC5Yr9aO5QAR6nzg+770BxX0oQ4EddvXnBBCSX39pWpfc0CINf7yWnN6kHi19UdzGok1/0SJgUosVGjEdj4YOrGUr3UdBU6NWI4IdWlb+SztiUOBOBacKn3Pf12nidTK+9TzsSvxdxVU2Icq9ZuipPxX0PbmxT1US3vTG4omVNhpijBUwGiKp9p59tzTu1QeFayhilbfeq3yBqW9f1H53PPxL+VhMSvEvZzMCs/Xr7Bncd/jRyU37gGPnz9EmfTa9PzHeq15XXP+o/OB9+eogcSvxZts/EOJNP7a523fevoaf93vDU79+weMf7u9P7hOhzrX+BJLge+LFsfnvdaL8c9m4BgSCuzhjkp5XycEjfx9+QuORb7OA7EoOUm4fmX+qmWs+DTld+m5oqE4F1eL05j/Ls7NgzZSFeH8z/La0/nfFK8XWdwS/vjs+P338WlXOI8chw4IhBBCCCGEEEIIIYQQQgghhBBCCEnngCBYzgaxnQ8QUfhaSvC2nA/+df9TQfGxmB5vF5XPqGTG13gcnSA0ZwhUPmO7olDumhMCKrHF+QCV/TL+muLfmh9NORZUxddhQeLF+OR4VUeAqohiXZB+N9UPzDPmyRqP1NefkLr9WOA89HUcsdYfnFfx5t/MS1lwqsqD2Ht+v7h16cK6XzPdUZA8Nu2EEHv8yWnkXxwCEC0Orf+p49fqRSeEEpG6kTr+1O37Iop83FP+cpQd74oTwuL2beH16uqucFz2sMY41PpAcYZYe+CisiXfs9X1awT9wv6be24Dsmf4+OPWTwlrKVR9FayWgjZwL/LduXuODdy6eajjL+OZ58WRK1sHHr+l7JXXjc1/B+Ytj0OIPP9FH+mrgB9a/Na3j62Nf6L1bxKo5B9a/LOGnA6G5oxgxSPOB5rTjazTmiJbU9z77mFfFWsvdOyXFgfefz6ffx/FCQGdJDTHoM9ODIeVvqYCH5wQtPKqs5DneGG5UjtV++/Q5hHmzcpXKKu7m9Oe/xD/6rboCFIVzv9+zP+2EUeD3ctxBwc6H4RBBwRCCCGEEEIIIYQQQgghhBBCCCGEpHdAiI2v8wEq3VMp34Wfr/+WOR8oP/TS9mzXlM+heULlMzpDYHvYrrxGJTXmr20nBFGuXy0XR8cZFf9Xt8tK80rKae0gqLCv63yg1S9728t4PG4eC8exv7EcB2LH03T7lmMEkvr6E1K3Xzf/Mg8FXEe09U/wXX98nRC6wsX5RS0noL7gu+d3bOUrKoutvdY1JTKeZ9XrW0/T7be9t3zXxl+Q5aQr+Wibvubft99W/1PHb9UbGmcoqeNP3b43mnJRjgcq1WMjDgyXs68+HVKY5Hv0eiq/BVGkaEpvS4GmKVukH5ay3NdZ4k8P2efoXPmqKVDxeKw9xPG80PqhvMQhcf3f1T/e+Ch/N+IENpDx9907fXZzX9jjeijxS1yW8v3Z3Ugbm//W+iflI89//NSmKZzXz9tBxr92CVhODmvhWxt/Xxoaf4lfU7o3Pv6+tDz+I8MhBPM0NOcD3/jPx0WFfqhiW3O4CSW2Yty3X5YjQeWva8GRwFKu431UVTYHKp6rKqStfnqD5ZVxwbgtR4FS/W+L68DEfYCS9V9jcZX9H4Tz//lgXjYPm6P5kzyr48L5n3T+v+J9vy7yfZTmQBlIaw4H42bu6+r8TwQdEAghhBBCCCGEEEIIIYQQQgghhBAyHAeEqs4HqRwPrPZx73PZ2xyP+yqfNWU+tiflZA91zKu1p7yGtCMK5G9nzTghjOfz/d/d42NByW6Nu+Z8gKBSHI9XdRJAJwQtrtB6NCW/KM6lf/gayyGxHBI0tH6HOhTUxVLwd+X663r7vuB1Ja+19a/q+tO1+RfqdHAqzgihe38vjB9+ivI//yEnVKfute7QfgCK52E56/1U7U9HL14KdMnr5iVS3gNJvfe7lYem409N1/MvyDyOnefU8TcVV1/iT93+5fIL5yhQ3JtdEAWHlPNV7Dfdz5KCXBSX16OC8traE1nAcr5Kb+21phhFZYyVV9X5wAIVqFX3AvfdY9y3PKA5IaDybbxxe+HeDmv8N3fvCw4PmhJne38z0PhvDjohmMr3yPNfU9rm/dTmdaT5rzkhqMr3gcWPSvi2xz/1+ifx4/Xf1vh3JX5fJ4Sq7/cdjG+7deumOOCs74LqQyV8qIJXcx7A8lY5XwcBy1GhdF9bOkeguXPcmWX3m1C0PGn9DnYSwOOG44DmYODrYGT2C8F+Ksp47Eeos5Lm+CHszrP1YTx266H7/mGzetj/5fxX5r98/+X+Sh61vKPjBOd/u/Mfyec9PgfUdTLA70UjOSJ0zvFgfHE0r/V8euJDBwRCCCGEEEIIIYQQQgghhBBCCCGE9N8Boa7zga/jgaZ8r8vP15miQXM+EFChbPUD82I5AGh7wseKX9qfTYu/ofl21IwTgqXgD3U+wPxv1tkvrGTcJD7NGQCV9JqC2nJCMJm6X+w5BwgNnPe+zgf4fqgTgun04Kk8r6pE19rH45Xz35HrL3X7GphnmUfWOhy6/vmuP+KIIP0KnX+x7gbiZIDOBuhwcGrOB0Jd5wPBUhBXVRjHqjdV+77tWgr0pmha+Szxi1OB5gRxqvQl/005BKR2fkjtnJE6/rbbv7z/av+55DPjo8qyfI94p4y8nBXP/3DzWzuOCKCgLilNRseV39pxQVNwW0pvqz3pNypiSgp2VzyY0L28XfmzndtbdBx2fn7eaNfM3uFAvgfqwMff3IN04PEj1p7PnztY0bkO2jX3Kg+ct1Xnv8TtreQeWPyNj3/H17/Gx7/j8RPPdDrng3zdVdZ19Xy3jmvrsqXgxXp826vqfCDHVacdBVTEr97dhzkhKHFbCuaNoZRerK6K5TTnBE/FtW+/1PoFo/68385xAOuR55BgxbflHOFABfjKOSiFcrrzf13Io+aEkMP5n2T+owNI/jlIc0Kq64SA9aRyRIj9/eT4eH34uasrDkp0QCCEEEIIIYQQQgghhBBCCCGEEEJI/x0QEFTGag4JVRW3WN+XFfv53eLPe4XMfDKvdL6lBMbj2t7v1nlau1Z5TXGt7cH+7SyuE4KljNecD6y8Wk4a6IggXED8moJfU1rHQvol/dQcDOS45oRQ1/mgrnNBrPPR8cBySPBuL/H111b7dfOP/Tg3pZ4vta5Tbf2x5pXW/7hXp+1scGrOB7EQZbUTshIjT3QAiIvkc+rWL3I8T4SkdDzQ9oS3EEUHKm8uRy05IoCCEhUmqBzKFdieWA4QVjmtPauflRXMkZidvS283m7fH33/aRSosIvF0Md/fOLxK0K80p63oYDiOvb6t0LrkorXs7cicaDxa9Qe/56sf42Nf0/iJ8dZP2+L14Osn4ajjYAONoivYtdShPti7Y1u1a858wiqQtzVvx3dF6635aR43ZUUx4EOBKqS3Smo89dG/JZDgtaOdznY295X+V9ycAjsTw7EpymSS444cp+5Plwt5/8kyIkGld+c/92Y/8jZOFvvX3frdhwMtO+tmqq3LmO/eiWPXYUOCIQQQgghhBBCCCGEEEIIIYQQQggZjgOCKGFRQTudh0kefZ0PRnWdDxbVnA+s/mgK4snkcPnQvdSxfU2JvFjODvZTlPOa4ryuE8Lu8bFQLyLtY/7r7nmP5eT1Zl38ZbqmvNfeL8U1Pzxvfrz7fp+v725/gL1rDzsW4GtNAW6Nl+UMMJsWf2GI2dTqR5pqfwTtq04IU79f3Ld9/XWtfSv/km9r/fuo7G3Z9PoT6kxCvW6/lNWi8E+9p/qpMfT8b9wyszAWBFnWMH5c7kLf18ohvucla3/sl2dyPI9Du77aiqvqHqKhe6jG5nL5ReG5X1OkWIotVIaLEljbwx7RzqvarzxvTpEkcX5Y/96Mg4QnqHhNzSvsYTvU8Zc4z5a3hXLb+5uTiF/inN1kytSurn+orGx6/YvFqcff1/WvbYYe//Qie9B6eknrPFQZWU9BSY/Xp7buomNAydHErev5de32Ope9zWM7GuTrBsSV368UxxZt/cJ1CMuV9nB/O/NTHMvXep57uVvOBRql+6ShtMbXlcsZzgwm2n3AM1/eimT3vLC4PbxOcf4b89/lbXPnnG4WnP9dnv/iTPH0UvyCSMqLM4jqFBXbEUGrNxVjv36I043mMIEOIKmhAwIhhBBCCCGEEEIIIYQQQgghhBBC+u+AoDkfoILWUu5azgf4WvYY/ybQ+eBiXE/Cg+3Hir9q+6I09iWPH5TITYFKf8TKBzoY4J71loJcyku+rPhVBX5L+DoRWFSd56nb921HHCf+vfjlU8rrL/X175t/uQ6tcdGcD7qy/rR9PfaVtpW4vgr0tuibEln6K04FoQr0vue/bvy+ecD6xRFCO26dZ9WP+J7XVvt5+cjOB6mvv1Ttd2W9iR1/W3GhEiZUCWsp5xpTwMKe99oeuaGKldXV3UEllbZ3rNQv5+Eeqhpmv0WRJPlTtvZUkX4E7r3+Os7KP7lwp5Pj+Xt6fiqcF4xnvoRc2XNi4y9x54qcE4tfUy6pCi/P+R97/cPj5vpn5EviDGYg8SOiVJPW6o5/19c/S6Fn1tvz+FM7HYSWv7z/6qAzk++e4B9ufgtyOtLmP16P2K6Gdt2XHG6kHuh/7ojgqfTPHQeU+lBBrDnyWOsVxq3lp5zXmZfyWO2/Qd37NWI5HVjl66Ldz71R+qspkTn/Mzj/j89Ha572df5r61H+vCDPS6GOCLGdEZpiHPYFLD5PaXeNrjkfCHRAIIQQQgghhBBCCCGEEEIIIYQQQkh7Dgjyi5Smf0lhKWgtxTq+rymHc+Xtu7D+oYJeEEWvpuzF9rV66sav4dt+LL6dfb3/5ew/t79G3evTVxkv46Apt6vmUUPbiz5WfVUdBar2w1K8y/tdbz+U1Ndf2+1rDiNa/pte/2JBp4NhKHFRed1Wv7oWf2qY/1GQY4DlJGC9X/e81O33/fprq33tdq+1/yJOXA3fP0Pjt/qlxfnHwH5pirzVZHlUuRqKpoQVxdoP879+iqH4y3HKzo322lOhUlKqOEWmpVzBPWVRyVl5z2MlrtRKYKtc68rfUxt/3JP31OJXjAC8nRCgX5Zy3wLLaU4Csv5t55AvA8v5YDnJ3l+77vcmftlj2vP6lzgF+T5V/nrH39P1D+MXTn79r4g4GaCzAToc+Dof4PMVKvTFMUBbD7H85ahYX+XnI6Dqcx2SX8+y/mMBdD7QnBA8y+F6FYp2nuWA4Ivsuf66O+4MMVL2lo+txK47/3KHi4qozkbidKEB/ZO8xoLz/zTmv8wzqT/0PMuxpavzX3VmqeqI0DVnhKrfv537OR503flAoAMCIYQQQgghhBBCCCGEEEIIIYQQQuI7IIQ6HbTljKCBylpUCFvv+yr5Z+Pib02sPdQ36+1BpW9s5X3T8Ut5icfaix2V+7FAJbbkH/P7uHk8eJ6Uqxo/jndT8f949/3+F8Lf3f6Q/XL4sRiPL7H6oynkfZ0PUrUvjOfzg/nty/XXePuGxGjrJBOzaZz1L5S6609T69HQ8N3zuy0Fbtucevyp6Vr+N27ZXHT7B8SdR/LY9fFP1b7mKKE5jjQ17+vGbzkfaHF+OYqjzECFRiyFECprUVFVeW9MX3LFdDG/ltLG2pO+7h6+ZrlAhe6vb/++fy7/+v1Pn4KcEALbq6zwtdr3VKxInN6cyPifavzoiCFKLssJoa31T9Y9qS90/UPnA9UBJNAJoTPx37496oSA17/1fWlVJ4iur3+a84GA+Rjq+t/U9+SWs4Gv8wE6AmgOINZzkrzG61EcEdAJQVO6avW3BjjrjJT1DhXKlnNPU1h50tYfVBzjuj0ufo1aUoBrSm3t/ms5GDQ1/ywHBa2fpvIb6ivd99xf7frn/I9D3+e/Wr/n50u1Hs/2U81/DSzv64iAz9Mj63miJWdPi53xvNx3xwOEDgiEEEIIIYQQQgghhBBCCCGEEEIIqc2bm+1DYY8mwfqlbizng2sQpp67X3xYe6EjqPRFhS7uSS58Of/Lm2POB6KgtfaiF7Q902Mrn2PFH1q/pnwWpbTkKz9PlMhOia4p0HPFv5znlP9W/q1x0PIv8YSOCyqxpd3YinwrH/lxpV1f5TfWh/Va71v1Jmsf8qzl+9+Pvxxc/7p2/TXV/sPd2iv/Vdc/rf3Q66/u+qNxcR+2t1YoqR2CrPZvL1re+wq4eyn2y1Kca8rgU8dSGvsq0vua/1jxW9ARYRQ1v6nXn9Q8jS56eb3Fuh6/GR/+/IVcLr/IFHoPt4XjqGiKpXz13Su+tOfs1d3+74f175WctiTOXFkLe8mL8tLaY9RX6VL1uNae1k9RCPvmJXdC8FWwILEU+BUVr4LlfPCnh799+s9yr+ts/gx1/HeL4vWCyujt/c2g45/d3B99PpfXpXm/yda5ttY/VJKiotBa/3CcUcnl+3lo/bztRfz5fQHmucxvVO6Fxt/X9c9yPtBQr4Oexd+080Fdttv7pM9Ps9lNYbzzvdcFUPSu3P2xqX5pYF6wvPW+VV8sVstbr73YrfmI6456/aHiWtoD5bVFqvlngnFo8SrXv+86qM5/WMfw/heLwcx/9/yhrdtdnf/B863q8ab6U3P+V8VyDrHA54vg5wxPtLxMan6x09XnCt//P9ABgRBCCCGEEEIIIYQQQgghhBBCCCG1+UPVX1Y09cuLUOcDQZS0qASOhSh9ReGr7U3ftvOBb/yW4rjuXvXa3uuash+V6PIalf8WmgLbUpxbefCNX9uLvi6YD1H0ixOCpfjXyllU7X/X2kc0p4muXH9daV/LP65/vmjXoeZIor0fa/3pitNBbGeEqu0bAtzG917vi7K86fjrIj+kFcW0pjyWPKNSve/5rxu/L1be6jpM9O38uo4Sfbn+UrefmtTxi3L+cpbtIWwpp1DBWhWsB+vDPcGjOx+UOpSNwwaUUeZ5NSntESp7nvue5/p3OcritPKEjgG5I4JSvqRY8VSsNqVo0RwPNFTng4GN/8Y5rqFCXnU+GFz8NwUnBHQ+wOf3XKHl5jOuN02tf9qe2gj2B687zflAixeP58o593f17r4X8aPir+rnPKxn/dzt9S+W0lHyVXIGGXU7/q47HiDoYBLrucn3OepO+wAh66bbU13W0ab617SCuy1l/0jbsx2Uytb66w0qozXFtPI69fzL12/ffguBSvLgfLvnG3lu0OKIxVDmP+Yrf06D+0FX5n8Ozi/tObbucav9lud/XSyHfgvVgSCy5WTd2T/t+PNE1f8/0AGBEEIIIYQQQgghhBBCCCGEEEIIIc05IKSmqiIWy2l7hmt8t/hzpjgfnR3da3w2nRxU4DflfOCrYJb35e9mva20d7z8lXhSOQH4OlDIcd/+WnvMy1/LScE3fkuhH+qEEMuRwBon7X2rH6nbj+140NT1l7r90jw1nANk/dPKhV5/fVl/LDRlj6XwSd++3y9FUyt/U++Fnjr+1DD/hwl1AKjrGND38/t6/TXVvuSz6w4kseOXuL8JdAZYTWDPcadgQkUTKquqotWr7YH+w/yvn/5TeRPqiKAquDVFpyjCQelj7WWP7eBxeY3HS8pvT6VpXWW65oggeCtjG9q7M9TxQOPUx//U4sfncVRujTfZuiPrn+bAEnv9Q6Wl7/qX77HtnC5Gbk9yy/lAwOPojIHtdSV+VIyK08W1my9PL7sonwPRYSDYGaCnSn/NEaEr63/XFYoasZ+XQtuVPdnF6WWsOB/gOuyrqPbdqx6P11VsW+dr7Vr91dDylOfROSE8v50dnL+WYli9jtz3MiNxHJTX1p7zsn66l6nmXw72s6LyW/KkrRuW09EYnA98nXhOff6recqdp7L78PP5Lu7893VCwHKC8Vx89nJ4vr1ePFUqV2pX+pN4/semrjNCKqY9fY6o+v8HOiAQQgghhBBCCCGEEEIIIYQQQgghZFSX/weTk42FLpDU/gAAAABJRU5ErkJggg==';
 const TEACHING_REFERENCE_IDS = [...new Set([...TEACHING_ROLES,...GRASS_SINGLE_TEACHING_ROLES,...ROAD_TEACHING_ROLES,...PINE_TEACHING_ROLES,...ROUND_TEACHING_ROLES,...MULTI_TEACHING_ROLES,...GRASS_MULTI_TEACHING_ROLES].map(r=>r[2]))];
@@ -171,7 +181,7 @@ const cloneTeaching = value => JSON.parse(JSON.stringify(value));
 const materialRole = role => role === 'ground' || role === 'rock';
 
 function teachingMask(shape, width=22, height=18) {
-  if (!TEACHING_SHAPES.some(([id]) => id === shape)) throw Error('未知预览形状');
+  if (!TEACHING_SHAPES.some(([id]) => id === shape)) throw Error(T("未知预览形状"));
   const mask = new Set();
   for (let y=0;y<height;y++) for (let x=0;x<width;x++) {
     let inside = x>=3 && x<=18 && y>=3 && y<=14;
@@ -185,25 +195,25 @@ function teachingMask(shape, width=22, height=18) {
 }
 
 function newTeachingProfile(atlas,kind='single-mountain') {
-  return {schema:1, kind, ...(multiTeaching(kind)?{previewLayers:2}:{}),name:kind==='single-mountain'?'我的单层山体':`我的${teachingTypeName(kind)}`, atlas:cloneTeaching(atlas),
+  return {schema:1, kind, ...(multiTeaching(kind)?{previewLayers:2}:{}),name:kind==='single-mountain'?T("我的单层山体"):T("我的{v}",{v:teachingTypeName(kind)}), atlas:cloneTeaching(atlas),
     roles:Object.fromEntries(teachingRoles(kind).map(([key]) => [key,{tile:null,base:'auto',layer:teachingLayer(kind,key)}]))};
 }
 
 function validateTeachingProfile(value, atlas, expectedKind=value?.kind) {
-  if (!value || value.schema!==1 || value.kind!==expectedKind || !TEACHING_TYPES.some(([kind])=>kind===value.kind) || !value.roles) throw Error('教学档案类型与当前窗口不同');
-  if (!value.atlas || value.atlas.fingerprint!==atlas.fingerprint || value.atlas.width!==atlas.width || value.atlas.height!==atlas.height) throw Error('档案的图块图片与当前图块集不同，请先切换到对应图块集');
-  if (typeof value.name!=='string' || value.name.length>80) throw Error('档案名称需在 80 字以内');
+  if (!value || value.schema!==1 || value.kind!==expectedKind || !TEACHING_TYPES.some(([kind])=>kind===value.kind) || !value.roles) throw Error(T("教学档案类型与当前窗口不同"));
+  if (!value.atlas || value.atlas.fingerprint!==atlas.fingerprint || value.atlas.width!==atlas.width || value.atlas.height!==atlas.height) throw Error(T("档案的图块图片与当前图块集不同，请先切换到对应图块集"));
+  if (typeof value.name!=='string' || value.name.length>80) throw Error(T("档案名称需在 80 字以内"));
   const max=384+atlas.width/32*(atlas.height/32)-1;
   const validTile=(id,empty)=>Number.isInteger(id)&&((empty&&id===0)||(id>=384&&id<=max));
   const profile=newTeachingProfile(atlas,value.kind); profile.name=value.name;
-  if(multiTeaching(value.kind)){const count=value.previewLayers??2;if(!Number.isSafeInteger(count)||count<2||count>99)throw Error('预览层数请填 2～99 的整数');profile.previewLayers=count;}
+  if(multiTeaching(value.kind)){const count=value.previewLayers??2;if(!Number.isSafeInteger(count)||count<2||count>99)throw Error(T("预览层数请填 2～99 的整数"));profile.previewLayers=count;}
   for(const [key] of teachingRoles(value.kind)){
     const entry=value.roles[key];
-    if(!entry)throw Error(`“${key}”的图块编号无效`);
+    if(!entry)throw Error(T("“{key}”的图块编号无效",{key:key}));
     const layer=entry.layer===undefined?teachingLayer(value.kind,key):entry.layer;
-    if(!Number.isSafeInteger(layer)||layer<0||layer>255)throw Error(`“${key}”的图层编号无效`);
-    if(!(entry.tile===null||validTile(entry.tile,layer>0))) throw Error(`“${key}”的图块编号无效`);
-    if(!(['auto','ground','rock'].includes(entry.base)||validTile(entry.base,false))) throw Error(`“${key}”的底图设置无效`);
+    if(!Number.isSafeInteger(layer)||layer<0||layer>255)throw Error(T("“{key}”的图层编号无效",{key:key}));
+    if(!(entry.tile===null||validTile(entry.tile,layer>0))) throw Error(T("“{key}”的图块编号无效",{key:key}));
+    if(!(['auto','ground','rock'].includes(entry.base)||validTile(entry.base,false))) throw Error(T("“{key}”的底图设置无效",{key:key}));
     profile.roles[key]={tile:entry.tile,base:!mountainTeaching(value.kind)||materialRole(key)?'auto':entry.base,layer};
   }
   return profile;
@@ -222,7 +232,7 @@ function teachingLayout(profile, shape, layout, engines={}) {
     const arrays=new Map([0,1,2].map(z=>[z,new Int32Array(width*height).fill(z===0?385:0)]));
     const s={width,height,arrays,events:new Set(),blocked:new Set(),read:(z,x,y)=>x>=0&&y>=0&&x<width&&y<height?arrays.get(z)[y*width+x]:0};
     const rect=(a,b,c,d)=>{const out=new Set();for(let y=b;y<=d;y++)for(let x=a;x<=c;x++)out.add(`${x},${y}`);return out;};
-    const apply=p=>{if(p.conflicts.size)throw Error('下挖教学范例生成失败');for(const c of p.changes)arrays.get(c.layer)[c.y*width+c.x]=c.value;};
+    const apply=p=>{if(p.conflicts.size)throw Error(T("下挖教学范例生成失败"));for(const c of p.changes)arrays.get(c.layer)[c.y*width+c.x]=c.value;};
     apply(engines.Mountain.plan(s,rect(1,1,20,16),'add',385,1,{x:10,y:8}));
     if(shape!=='digGround')apply(engines.Mountain.plan(s,rect(3,3,18,14),'add',385,'raise',{x:10,y:8}));
     apply(engines.Features.planDig(s,rect(6,5,15,12),385,{x:10,y:8}));
@@ -235,10 +245,10 @@ function teachingLayout(profile, shape, layout, engines={}) {
     for(let y=5;y<=12;y++)for(let x=6;x<=(shape==='expanded'?17:14);x++)upper.add(`${x},${y}`);
     plan=engines.Mountain.combine([base,upper],width,height);
   }else plan=layout(teachingMask(shape,width,height),width,height);
-  if(plan.errors.size) throw Error('教学形状包含无法生成的地形');
+  if(plan.errors.size) throw Error(T("教学形状包含无法生成的地形"));
   for(let y=0;y<height;y++)for(let x=0;x<width;x++){
     const t=plan.tiles.get(`${x},${y}`), role=t?roleById.get(t.id):'ground';
-    if(!role) throw Error(`未识别的山体角色 ${t.id}`);
+    if(!role) throw Error(T("未识别的山体角色 {id}",{id:t.id}));
     const entry=profile.roles[role], auto=t?.rock?'rock':'ground';
     const grassStyle=profile.kind==='grass-single-mountain',referenceRole=teachingRoles(profile.kind).find(([k])=>k===role);
     const baseRole=materialRole(role)?role:entry.base==='auto'?auto:entry.base;
@@ -251,7 +261,7 @@ function teachingLayout(profile, shape, layout, engines={}) {
 
 async function teachingTimeout(promise, stage) {
   let timer;
-  try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error(`${stage}超时，请点击“重新加载”重试`)),15000);})]);}
+  try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error(T("{stage}超时，请点击“重新加载”重试",{stage:stage}))),15000);})]);}
   finally{clearTimeout(timer);}
 }
 
@@ -259,27 +269,27 @@ async function loadTeachingImage(ctx, tilesetId, nativeLoader) {
   // Maker Studio 1.7.1's SDK reads atlas.canvas although its renderer returns
   // tilesetBitmap. Keep the public route first, then use the versioned bridge.
   let url=null,owned=false;
-  try{url=await teachingTimeout(Promise.resolve().then(()=>ctx.tileset.getImageBlobUrl(tilesetId)),'读取图块');}catch(error){if(!nativeLoader)throw error;}
+  try{url=await teachingTimeout(Promise.resolve().then(()=>ctx.tileset.getImageBlobUrl(tilesetId)),T("读取图块"));}catch(error){if(!nativeLoader)throw error;}
   try{
     if(!url){
-      if(!nativeLoader)throw Error('取图接口返回空值，且当前宿主没有可用的图块兼容接口');
-      const source=await teachingTimeout(nativeLoader(tilesetId),'读取原生图块');
+      if(!nativeLoader)throw Error(T("取图接口返回空值，且当前宿主没有可用的图块兼容接口"));
+      const source=await teachingTimeout(nativeLoader(tilesetId),T("读取原生图块"));
       let blob;
       if(source instanceof Blob){blob=source;}
       else{
-        if(!source||!source.width||!source.height)throw Error('原生图块图片为空，请确认该图块集图片存在');
+        if(!source||!source.width||!source.height)throw Error(T("原生图块图片为空，请确认该图块集图片存在"));
         const canvas=document.createElement('canvas');canvas.width=source.width;canvas.height=source.height;
         canvas.getContext('2d').drawImage(source,0,0);
-        blob=await teachingTimeout(new Promise(resolve=>canvas.toBlob(resolve,'image/png')),'转换图块');
+        blob=await teachingTimeout(new Promise(resolve=>canvas.toBlob(resolve,'image/png')),T("转换图块"));
       }
-      if(!blob)throw Error('无法将原生图块转换为预览图片');
+      if(!blob)throw Error(T("无法将原生图块转换为预览图片"));
       url=URL.createObjectURL(blob);owned=true;
     }
-    const response=await teachingTimeout(fetch(url),'读取图块图片');if(!response.ok)throw Error('图块图片读取失败');
-    const bytes=await teachingTimeout(response.arrayBuffer(),'读取图块数据');
+    const response=await teachingTimeout(fetch(url),T("读取图块图片"));if(!response.ok)throw Error(T("图块图片读取失败"));
+    const bytes=await teachingTimeout(response.arrayBuffer(),T("读取图块数据"));
     const digest=async data=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',data)),v=>v.toString(16).padStart(2,'0')).join('');
     const legacyHash=await digest(bytes);
-    const image=new Image();image.src=url;await teachingTimeout(image.decode(),'解码图块');
+    const image=new Image();image.src=url;await teachingTimeout(image.decode(),T("解码图块"));
     const pixels=document.createElement('canvas');pixels.width=image.naturalWidth;pixels.height=image.naturalHeight;
     const drawing=pixels.getContext('2d');drawing.drawImage(image,0,0);
     const hash=`${pixels.width}x${pixels.height}:`+await digest(drawing.getImageData(0,0,pixels.width,pixels.height).data);
@@ -292,7 +302,7 @@ function createTileTeaching(ctx, layout, beforeOpen=()=>{}, nativeLoader=null, o
   let registered=false;
   const register=()=>{
     if(registered)return; registered=true;
-    ctx.ui.registerPanel({id,title:'图块教学',defaultPosition:'float',showInMenu:false,
+    ctx.ui.registerPanel({id,title:T("图块教学"),defaultPosition:'float',showInMenu:false,
       defaultSize:{width:1180,height:790},render:renderTeaching});
   };
   function renderTeaching(host,kind='single-mountain') {
@@ -318,20 +328,20 @@ function createTileTeaching(ctx, layout, beforeOpen=()=>{}, nativeLoader=null, o
       .mimi-teach .mt-status{min-height:40px;margin:10px 0 0;padding:9px;border-left:3px solid #6fb78e;background:var(--bg-secondary,#202735);white-space:pre-wrap}
       .mimi-teach .mt-status[data-error=true]{border-color:#ec8888}.mimi-teach .mt-json{margin-top:10px}.mimi-teach .mt-json textarea{width:100%;height:145px;font-family:monospace}.mimi-teach .mt-progress{margin-left:auto;color:#b9e6cc}
     </style>
-    <div class="mt-top"><h2>图块教学</h2><select data-mt="kind" aria-label="教学类型"></select><span class="mt-progress" data-mt="progress"></span></div>
-    <p class="mt-hint">点选范例中的位置，再从左侧选择图块。同类位置一起更新，点击一次“整体保存教学”即可试画；缺失映射的格子标红跳过，其余正常绘制。多层山体、草地多层山体分别保存，一套映射用于不同层数。</p>
-    <div class="mt-status" data-mt="status" role="status" style="margin:0 0 12px">正在读取图块集…</div>
-     <div class="mt-top"><label>图块集 <select data-mt="tileset" aria-label="教学图块集"></select></label><button data-mt="retry">重新加载</button><label>教学式样 <select data-mt="profileSelect" aria-label="已保存的教学式样"></select></label><label>名称 <input data-mt="name" maxlength="80" aria-label="当前教学式样名称"></label><button data-mt="example">载入 Outside 示例</button><button data-mt="new">新增教学</button></div>
+    <div class="mt-top"><h2>${T("图块教学")}</h2><select data-mt="kind" aria-label="${T("教学类型")}"></select><span class="mt-progress" data-mt="progress"></span></div>
+    <p class="mt-hint">${T("点选范例中的位置，再从左侧选择图块。同类位置一起更新，点击一次“整体保存教学”即可试画；缺失映射的格子标红跳过，其余正常绘制。多层山体、草地多层山体分别保存，一套映射用于不同层数。")}</p>
+    <div class="mt-status" data-mt="status" role="status" style="margin:0 0 12px">${T("正在读取图块集…")}</div>
+     <div class="mt-top"><label>${T("图块集")} <select data-mt="tileset" aria-label="${T("教学图块集")}"></select></label><button data-mt="retry">${T("重新加载")}</button><label>${T("教学式样")} <select data-mt="profileSelect" aria-label="${T("已保存的教学式样")}"></select></label><label>${T("名称")} <input data-mt="name" maxlength="80" aria-label="${T("当前教学式样名称")}"></label><button data-mt="example">${T("载入 Outside 示例")}</button><button data-mt="new">${T("新增教学")}</button></div>
     <div class="mt-columns">
-      <section class="mt-card"><h3>① 选择自己的图块</h3><p class="mt-hint">当前项：<span data-mt="assignment"></span></p><div class="mt-palette-scroll"><canvas data-mt="palette" aria-label="图块素材" tabindex="0"></canvas></div><div class="mt-inline" style="margin-top:8px"><input data-mt="tileId" type="number" min="384" step="1" placeholder="图块 ID" aria-label="填写图块 ID"><button data-mt="assign">填入</button></div><p class="mt-hint">第一版使用普通 32×32 图块；自动元件暂不参与教学。</p></section>
-      <section class="mt-card"><h3>② 填写与预览</h3><div class="mt-inline"><select data-mt="shape" aria-label="预览形状"></select><select data-mt="viewLayer" aria-label="预览图层"><option value="both">合成图层</option><option value="base">仅图层 1</option><option value="edge">仅图层 2</option></select></div><div class="mt-view"><canvas data-mt="preview" width="528" height="432" aria-label="图块教学预览"></canvas></div><label><input data-mt="guide" type="checkbox" checked> 未填写处显示半透明范例</label><label style="display:block"><input data-mt="selection" type="checkbox" checked> 显示红色选中框</label><div class="mt-role-list" data-mt="roles"></div></section>
-      <section class="mt-card"><h3>③ 当前填写位置</h3><strong data-mt="roleTitle"></strong><p class="mt-hint" data-mt="roleHint"></p><div class="mt-field"><label>绘制图层</label><select data-mt="targetLayer" aria-label="该图块的绘制图层"></select></div><div class="mt-field" data-mt="partRow"><label>编辑内容</label><select data-mt="editPart" aria-label="编辑主图块或底图"><option value="tile">当前图块</option><option value="underlay">下方底图</option></select></div><div class="mt-readout" data-mt="readout"></div><div class="mt-field"><button data-mt="auto">底图跟随范例规则</button><button data-mt="empty">当前图层留空</button><button data-mt="clear">清除当前填写</button><button data-mt="next">下一个未填写项</button></div><p class="mt-hint">${kind==='pine-forest'?'范例包含单棵、连片和洞口。A / B 是连片树身的交替样式；逐项点击可查看对应位置。':kind==='round-forest'?'左侧单棵树的树冠下方直接接树底；右侧连片树才使用树身。范例同时展示独立、接续和开口。':'内角的方向表示缺口在哪一侧。点击范例可查看该格，不必凭名称猜测。'}</p><div class="mt-field"><button class="mt-primary" data-mt="save">整体保存教学</button><button data-mt="jsonToggle">导入 / 导出 JSON</button></div><div class="mt-hint" data-mt="dirty"></div></section>
+      <section class="mt-card"><h3>${T("① 选择自己的图块")}</h3><p class="mt-hint">${T("当前项：")}<span data-mt="assignment"></span></p><div class="mt-palette-scroll"><canvas data-mt="palette" aria-label="${T("图块素材")}" tabindex="0"></canvas></div><div class="mt-inline" style="margin-top:8px"><input data-mt="tileId" type="number" min="384" step="1" placeholder="${T("图块 ID")}" aria-label="${T("填写图块 ID")}"><button data-mt="assign">${T("填入")}</button></div><p class="mt-hint">${T("第一版使用普通 32×32 图块；自动元件暂不参与教学。")}</p></section>
+      <section class="mt-card"><h3>${T("② 填写与预览")}</h3><div class="mt-inline"><select data-mt="shape" aria-label="${T("预览形状")}"></select><select data-mt="viewLayer" aria-label="${T("预览图层")}"><option value="both">${T("合成图层")}</option><option value="base">${T("仅图层 1")}</option><option value="edge">${T("仅图层 2")}</option></select></div><div class="mt-view"><canvas data-mt="preview" width="528" height="432" aria-label="${T("图块教学预览")}"></canvas></div><label><input data-mt="guide" type="checkbox" checked> ${T("未填写处显示半透明范例")}</label><label style="display:block"><input data-mt="selection" type="checkbox" checked> ${T("显示红色选中框")}</label><div class="mt-role-list" data-mt="roles"></div></section>
+      <section class="mt-card"><h3>${T("③ 当前填写位置")}</h3><strong data-mt="roleTitle"></strong><p class="mt-hint" data-mt="roleHint"></p><div class="mt-field"><label>${T("绘制图层")}</label><select data-mt="targetLayer" aria-label="${T("该图块的绘制图层")}"></select></div><div class="mt-field" data-mt="partRow"><label>${T("编辑内容")}</label><select data-mt="editPart" aria-label="${T("编辑主图块或底图")}"><option value="tile">${T("当前图块")}</option><option value="underlay">${T("下方底图")}</option></select></div><div class="mt-readout" data-mt="readout"></div><div class="mt-field"><button data-mt="auto">${T("底图跟随范例规则")}</button><button data-mt="empty">${T("当前图层留空")}</button><button data-mt="clear">${T("清除当前填写")}</button><button data-mt="next">${T("下一个未填写项")}</button></div><p class="mt-hint">${kind==='pine-forest'?T("范例包含单棵、连片和洞口。A / B 是连片树身的交替样式；逐项点击可查看对应位置。"):kind==='round-forest'?T("左侧单棵树的树冠下方直接接树底；右侧连片树才使用树身。范例同时展示独立、接续和开口。"):T("内角的方向表示缺口在哪一侧。点击范例可查看该格，不必凭名称猜测。")}</p><div class="mt-field"><button class="mt-primary" data-mt="save">${T("整体保存教学")}</button><button data-mt="jsonToggle">${T("导入 / 导出 JSON")}</button></div><div class="mt-hint" data-mt="dirty"></div></section>
     </div>
-    <div class="mt-json" data-mt="jsonArea" hidden><textarea data-mt="json" aria-label="教学 JSON" placeholder="可粘贴教学档案 JSON"></textarea><div class="mt-actions"><button data-mt="export">生成 JSON</button><button data-mt="exportFile">导出到 Mod 文件夹</button><button data-mt="import">导入此 JSON</button></div></div>
+    <div class="mt-json" data-mt="jsonArea" hidden><textarea data-mt="json" aria-label="${T("教学 JSON")}" placeholder="${T("可粘贴教学档案 JSON")}"></textarea><div class="mt-actions"><button data-mt="export">${T("生成 JSON")}</button><button data-mt="exportFile">${T("导出到 Mod 文件夹")}</button><button data-mt="import">${T("导入此 JSON")}</button></div></div>
     `;
     host.appendChild(root);
     const layerField=document.createElement('label');layerField.className='mt-top';layerField.style.display=multiTeaching(kind)?'flex':'none';
-    layerField.innerHTML='预览层数 <input data-mt="previewLayers" aria-label="多层山体预览层数" type="number" min="2" max="99" step="1" value="2" style="width:90px"><span class="mt-hint">改变预览层数检查接缝；实际绘制使用主面板层数。</span>';
+    layerField.innerHTML=`${T("预览层数")} <input data-mt="previewLayers" aria-label="${T("多层山体预览层数")}" type="number" min="2" max="99" step="1" value="2" style="width:90px"><span class="mt-hint">${T("改变预览层数检查接缝；实际绘制使用主面板层数。")}</span>`;
     root.querySelector('.mt-view').before(layerField);
     const refs=Object.fromEntries([...root.querySelectorAll('[data-mt]')].map(el=>[el.dataset.mt,el]));
     let alive=true,token=0,profile=null,library={version:2,selectedId:null,entries:[]},activeId=null,atlasImage=null,atlas=null,storageKey=null,role=kind==='round-forest'?'capTip':'ground',selectedCell=null,selectedTile=null,dirty=false,busy=false,saveBusy=false;
@@ -395,26 +405,26 @@ function createTileTeaching(ctx, layout, beforeOpen=()=>{}, nativeLoader=null, o
     function sync(){
       if(!profile)return;busyUI();
       const options=library.entries.map(entry=>new Option(entry.id===activeId?profile.name:entry.profile.name,entry.id));
-      if(!library.entries.some(entry=>entry.id===activeId))options.push(new Option(`${profile.name}（未保存）`,activeId));
+      if(!library.entries.some(entry=>entry.id===activeId))options.push(new Option(T("{name}（未保存）",{name:profile.name}),activeId));
       refs.profileSelect.replaceChildren(...options);refs.profileSelect.value=activeId;refs.profileSelect.disabled=busy||saveBusy;
-      const material=materialRole(role),entry=activeEntry(),title=TEACHING_ROLES.find(([key])=>key===role)[1];
+      const material=materialRole(role),entry=activeEntry(),title=T(TEACHING_ROLES.find(([key])=>key===role)[1]);
       const available=[...new Set([0,1,2,entry.layer,...(ctx.map.layers(ctx.editor.activeMapId())||[]).map(layer=>layer.index)])].filter(Number.isSafeInteger).sort((a,b)=>a-b);
-      refs.targetLayer.replaceChildren(...available.map(z=>new Option(`图层 ${z+1}`,String(z))));
+      refs.targetLayer.replaceChildren(...available.map(z=>new Option(T("图层 {v}",{v:z+1}),String(z))));
       refs.targetLayer.value=String(entry.layer);refs.targetLayer.disabled=busy;
       refs.partRow.style.display=simple||material?'none':'grid';refs.editPart.disabled=busy||simple||material;
       refs.name.value=profile.name;refs.roleTitle.textContent=title;
       if(multiTeaching(kind))refs.previewLayers.value=String(profile.previewLayers??2);
-      refs.roleHint.textContent=`该位置将画在图层 ${entry.layer+1}。${kind==='pine-forest'?'高松林保持示例的树位尺寸。':kind==='round-forest'?'单棵圆冠树冠顶直接接树底。':mountainTeaching(kind)?'岩壁下方底图可单独指定。':'同类位置一起更新。'}`;
-      refs.assignment.textContent=`${title} / 图层 ${entry.layer+1}`;
-      const tileText=id=>id===null?'未填写':id===0?'透明 / 留空':`ID ${id}`;
-      const baseText=entry.base==='auto'?'自动：按范例使用背景 / 岩面':entry.base==='ground'?'使用背景草地':entry.base==='rock'?'使用山顶岩面':tileText(entry.base);
-      refs.readout.textContent=material?`图层 ${entry.layer+1}：${tileText(entry.tile)}`:`图层 ${entry.layer+1}：${tileText(entry.tile)}\n下方底图：${baseText}`;
-      refs.auto.disabled=busy||material;refs.empty.disabled=busy||entry.layer===0;refs.empty.textContent=`图层 ${entry.layer+1} 留空`;
+      refs.roleHint.textContent=T("该位置将画在图层 {v}。{v2}",{v:entry.layer+1,v2:kind==='pine-forest'?T("高松林保持示例的树位尺寸。"):kind==='round-forest'?T("单棵圆冠树冠顶直接接树底。"):mountainTeaching(kind)?T("岩壁下方底图可单独指定。"):T("同类位置一起更新。")});
+      refs.assignment.textContent=T("{title} / 图层 {v}",{title:title,v:entry.layer+1});
+      const tileText=id=>id===null?T("未填写"):id===0?T("透明 / 留空"):`ID ${id}`;
+      const baseText=entry.base==='auto'?T("自动：按范例使用背景 / 岩面"):entry.base==='ground'?T("使用背景草地"):entry.base==='rock'?T("使用山顶岩面"):tileText(entry.base);
+      refs.readout.textContent=material?T("图层 {v}：{v2}",{v:entry.layer+1,v2:tileText(entry.tile)}):T("图层 {v}：{v2}\n下方底图：{baseText}",{v:entry.layer+1,v2:tileText(entry.tile),baseText:baseText});
+      refs.auto.disabled=busy||material;refs.empty.disabled=busy||entry.layer===0;refs.empty.textContent=T("图层 {v} 留空",{v:entry.layer+1});
       refs.save.disabled=busy||saveBusy;
       refs.example.disabled=busy||!/^Outside(?:\.|$)/i.test(atlas.tilesetName);
-      refs.progress.textContent=`已填写 ${teachingProgress(profile)} / ${TEACHING_ROLES.length}`;
-      refs.dirty.textContent=dirty?'有未保存的教学修改':'当前教学已保存或尚未修改';
-      for(const button of refs.roles.children){button.setAttribute('aria-pressed',String(button.dataset.role===role));const [key,name]=TEACHING_ROLES.find(([key])=>key===button.dataset.role);button.textContent=`${profile.roles[key].tile===null?'○':'✓'} ${name}`;}
+      refs.progress.textContent=T("已填写 {v} / {length}",{v:teachingProgress(profile),length:TEACHING_ROLES.length});
+      refs.dirty.textContent=dirty?T("有未保存的教学修改"):T("当前教学已保存或尚未修改");
+      for(const button of refs.roles.children){button.setAttribute('aria-pressed',String(button.dataset.role===role));const [key,name]=TEACHING_ROLES.find(([key])=>key===button.dataset.role);button.textContent=`${profile.roles[key].tile===null?'○':'✓'} ${T(name)}`;}
       const current=material||refs.editPart.value==='tile'?entry.tile:typeof entry.base==='number'?entry.base:null;
       selectedTile=current;refs.tileId.value=current>=384?String(current):'';
       paint();
@@ -426,84 +436,85 @@ function createTileTeaching(ctx, layout, beforeOpen=()=>{}, nativeLoader=null, o
     function assignTile(id){
       if(busy||!profile)return;
       const max=384+atlas.width/32*(atlas.height/32)-1;
-      if(!Number.isInteger(id)||id<384||id>max){message(`请选取有效普通图块（384～${max}）。`,true);return;}
+      if(!Number.isInteger(id)||id<384||id>max){message(T("请选取有效普通图块（384～{max}）。",{max:max}),true);return;}
       const entry=activeEntry();
       if(materialRole(role)||refs.editPart.value==='tile')entry.tile=id;else entry.base=id;
-      changed();message(`已填入 ID ${id}；所有同类位置已更新。`);
+      changed();message(T("已填入 ID {id}；所有同类位置已更新。",{id:id}));
     }
     async function loadTileset(tilesetId){
-      remember();const current=++token;busy=true;busyUI();profile=null;atlasImage=null;atlas=null;message('正在读取图块图片和已保存的教学…');
+      remember();const current=++token;busy=true;busyUI();profile=null;atlasImage=null;atlas=null;message(T("正在读取图块图片和已保存的教学…"));
       refs.preview.getContext('2d').clearRect(0,0,528,432);refs.palette.width=1;refs.palette.height=1;
       try{
-        const info=ctx.tileset.info(tilesetId);if(!info)throw Error('找不到图块集信息');
+        const info=ctx.tileset.info(tilesetId);if(!info)throw Error(T("找不到图块集信息"));
         const {image,hash,legacyHash}=await loadTeachingImage(ctx,tilesetId,nativeLoader);
-        if(image.naturalWidth%32||image.naturalHeight%32||!image.naturalWidth||!image.naturalHeight)throw Error('第一版要求图块图片宽高为 32 像素的整数倍');
+        if(image.naturalWidth%32||image.naturalHeight%32||!image.naturalWidth||!image.naturalHeight)throw Error(T("第一版要求图块图片宽高为 32 像素的整数倍"));
         const nextAtlas={tilesetId,tilesetName:info.tilesetName||info.name||String(tilesetId),width:image.naturalWidth,height:image.naturalHeight,fingerprint:hash};
         const project=ctx.editor.gameRoot?.()||'unknown-project';
         const loaded=await readTeachingLibrary(ctx,kind,project,nextAtlas,legacyHash);
         if(!alive||current!==token)return;
         atlas=nextAtlas;atlasImage=image;storageKey=loaded.key;
         for(const option of [...refs.viewLayer.options])if(option.value.startsWith('layer:'))option.remove();
-        for(const layer of ctx.map.layers(ctx.editor.activeMapId())||[])if(layer.index>=3)refs.viewLayer.add(new Option(`仅图层 ${layer.index+1}`,`layer:${layer.index}`));
+        for(const layer of ctx.map.layers(ctx.editor.activeMapId())||[])if(layer.index>=3)refs.viewLayer.add(new Option(T("仅图层 {v}",{v:layer.index+1}),`layer:${layer.index}`));
         const draft=drafts.get(storageKey);
         library=draft?.library||loaded.library;
         activeId=draft?.activeId||library.selectedId||library.entries[0]?.id||teachingId();
         let warning='';
         try{profile=checkProfile(draft?.profile||library.entries.find(entry=>entry.id===activeId)?.profile||makeProfile(atlas),atlas);dirty=Boolean(draft?.dirty);}
-        catch(error){profile=makeProfile(atlas);activeId=teachingId();dirty=false;warning=`教学档案无法读取：${error.message}。`;}
+        catch(error){profile=makeProfile(atlas);activeId=teachingId();dirty=false;warning=T("教学档案无法读取：{message}。",{message:error.message});}
         refs.palette.width=atlas.width;refs.palette.height=atlas.height;refs.palette.style.width=`${atlas.width}px`;refs.palette.style.height=`${atlas.height}px`;
         busy=false;role=kind==='round-forest'?'capTip':'ground';selectedCell=null;refs.editPart.value='tile';sync();
-        message(warning||(library.entries.length||draft?'已恢复教学；可从“教学式样”切换，也可新增。':kind==='round-forest'?'半透明树形是待填写位置；点击树冠或树底，再从左侧选取相应图块。':'先点“背景草地”，再从左侧图块集选取素材。也可载入 Outside 示例熟悉操作。'),Boolean(warning));
+        message(warning||(library.entries.length||draft?T("已恢复教学；可从“教学式样”切换，也可新增。"):kind==='round-forest'?T("半透明树形是待填写位置；点击树冠或树底，再从左侧选取相应图块。"):T("先点“背景草地”，再从左侧图块集选取素材。也可载入 Outside 示例熟悉操作。")),Boolean(warning));
       }catch(error){if(alive&&current===token){busy=false;for(const el of root.querySelectorAll('button,input,select,textarea'))el.disabled=true;refs.tileset.disabled=false;refs.retry.disabled=false;refs.kind.disabled=false;message(error.message,true);}}
     }
-    for(const [value,name] of [...TEACHING_SHAPES,...(singleTeaching(kind)?MOUNTAIN_OPERATION_SHAPES:[])]){const option=new Option(name,value);refs.shape.add(option);}
-    for(const [key,name] of TEACHING_ROLES){const button=document.createElement('button');button.dataset.role=key;button.textContent=name;listen(button,'click',()=>selectRole(key));refs.roles.appendChild(button);}
+    for(const [value,name] of [...TEACHING_SHAPES,...(singleTeaching(kind)?MOUNTAIN_OPERATION_SHAPES:[])]){const option=new Option(T(name),value);refs.shape.add(option);}
+    for(const [key,name] of TEACHING_ROLES){const button=document.createElement('button');button.dataset.role=key;button.textContent=T(name);listen(button,'click',()=>selectRole(key));refs.roles.appendChild(button);}
     listen(refs.tileset,'change',()=>loadTileset(Number(refs.tileset.value)));
     listen(refs.retry,'click',()=>loadTileset(Number(refs.tileset.value)));
     listen(refs.palette,'click',event=>{if(busy||!atlas||!profile)return;const rect=refs.palette.getBoundingClientRect();const x=Math.floor((event.clientX-rect.left)*refs.palette.width/rect.width/32),y=Math.floor((event.clientY-rect.top)*refs.palette.height/rect.height/32);assignTile(384+y*(atlas.width/32)+x);});
     listen(refs.preview,'click',event=>{if(!profile||busy)return;const rect=refs.preview.getBoundingClientRect(),generated=teachingLayout(profile,refs.shape.value,layout,engines);const x=Math.floor((event.clientX-rect.left)/rect.width*generated.width),y=Math.floor((event.clientY-rect.top)/rect.height*generated.height);const cell=generated.cells.find(c=>c.x===x&&c.y===y);if(cell){const view=refs.viewLayer.value,layer=view==='both'?null:view==='base'?0:view==='edge'?1:view==='top'?2:Number(view.slice(6));const pieces=physicalPieces(cell).filter(piece=>layer===null||piece.layer===layer);selectRole(pieces.at(-1)?.role||cell.role,{x,y});}});
-    listen(refs.previewLayers,'input',()=>{if(!profile||!multiTeaching(kind))return;const count=Number(refs.previewLayers.value);if(!Number.isSafeInteger(count)||count<2||count>99){message('预览层数请填 2～99 的整数。',true);return;}profile.previewLayers=count;selectedCell=null;changed();message(`当前预览 ${count} 层；教学映射共用于所有层数。`);});
+    listen(refs.previewLayers,'input',()=>{if(!profile||!multiTeaching(kind))return;const count=Number(refs.previewLayers.value);if(!Number.isSafeInteger(count)||count<2||count>99){message(T("预览层数请填 2～99 的整数。"),true);return;}profile.previewLayers=count;selectedCell=null;changed();message(T("当前预览 {count} 层；教学映射共用于所有层数。",{count:count}));});
     listen(refs.assign,'click',()=>assignTile(Number(refs.tileId.value)));
     listen(refs.tileId,'keydown',event=>{if(event.key==='Enter')assignTile(Number(refs.tileId.value));});
-    listen(refs.name,'input',()=>{if(profile){profile.name=refs.name.value;dirty=true;remember();refs.dirty.textContent='有未保存的教学修改';refs.profileSelect.selectedOptions[0].textContent=profile.name+(library.entries.some(e=>e.id===activeId)?'':'（未保存）');}});
+    listen(refs.name,'input',()=>{if(profile){profile.name=refs.name.value;dirty=true;remember();refs.dirty.textContent=T("有未保存的教学修改");refs.profileSelect.selectedOptions[0].textContent=profile.name+(library.entries.some(e=>e.id===activeId)?'':T("（未保存）"));}});
     listen(refs.profileSelect,'change',async()=>{const next=refs.profileSelect.value,key=storageKey;if(next===activeId)return;
-      if(dirty){const ok=await ctx.ui.showConfirmDialog({title:'切换教学式样',message:'当前式样有未保存的修改。放弃修改并切换？'});if(!ok||!alive||storageKey!==key){refs.profileSelect.value=activeId;return;}}
+      if(dirty){const ok=await ctx.ui.showConfirmDialog({title:T("切换教学式样"),message:T("当前式样有未保存的修改。放弃修改并切换？")});if(!ok||!alive||storageKey!==key){refs.profileSelect.value=activeId;return;}}
       const entry=library.entries.find(item=>item.id===next);if(!entry){refs.profileSelect.value=activeId;return;}
-      activeId=entry.id;profile=cloneTeaching(entry.profile);dirty=false;role=kind==='round-forest'?'capTip':'ground';selectedCell=null;remember();sync();message(`已切换到“${profile.name}”。`);
+      activeId=entry.id;profile=cloneTeaching(entry.profile);dirty=false;role=kind==='round-forest'?'capTip':'ground';selectedCell=null;remember();sync();message(T("已切换到“{name}”。",{name:profile.name}));
     });
-    listen(refs.targetLayer,'change',()=>{activeEntry().layer=Number(refs.targetLayer.value);changed();message(`“${TEACHING_ROLES.find(([key])=>key===role)[1]}”将画在图层 ${activeEntry().layer+1}。`);});
+    listen(refs.targetLayer,'change',()=>{activeEntry().layer=Number(refs.targetLayer.value);changed();message(T("“{v}”将画在图层 {v2}。",{v:TEACHING_ROLES.find(([key])=>key===role)[1],v2:activeEntry().layer+1}));});
     listen(refs.editPart,'change',sync);
     listen(refs.shape,'change',()=>{selectedCell=null;paint();});listen(refs.viewLayer,'change',paint);listen(refs.guide,'change',paint);listen(refs.selection,'change',paint);
     listen(refs.auto,'click',()=>{activeEntry().base='auto';changed();});
     listen(refs.empty,'click',()=>{activeEntry().tile=0;changed();});
     listen(refs.clear,'click',()=>{if(materialRole(role)||refs.editPart.value==='tile')activeEntry().tile=null;else activeEntry().base='auto';changed();});
-    listen(refs.next,'click',()=>{const start=TEACHING_ROLES.findIndex(([key])=>key===role);for(let i=1;i<=TEACHING_ROLES.length;i++){const key=TEACHING_ROLES[(start+i)%TEACHING_ROLES.length][0];if(profile.roles[key].tile===null){selectRole(key);return;}}message('全部位置已经填写，可切换预览形状检查。');});
-    listen(refs.example,'click',()=>{if(!/^Outside(?:\.|$)/i.test(atlas.tilesetName))return;profile=makeProfile(atlas);profile.name=`Outside ${teachingTypeName(kind)}示例`;for(const [key,,tile] of TEACHING_ROLES)profile.roles[key].tile=tile;try{profile=checkProfile(profile,atlas);changed();message('已载入 Outside 示例；可点任意位置重新教学。');}catch(error){message(error.message,true);}});
-    listen(refs.new,'click',async()=>{const key=storageKey;if(dirty){const ok=await ctx.ui.showConfirmDialog({title:'新增教学',message:'当前式样有未保存的修改。放弃修改并新增空白式样？已保存的式样会保留。'});if(!ok||!alive||storageKey!==key)return;}
-      activeId=teachingId();profile=makeProfile(atlas);profile.name=`新教学 ${library.entries.length+1}`;role=kind==='round-forest'?'capTip':'ground';selectedCell=null;dirty=true;remember();sync();message('已新增独立的空白教学；填写名称和图块后点击“整体保存教学”。');});
+    listen(refs.next,'click',()=>{const start=TEACHING_ROLES.findIndex(([key])=>key===role);for(let i=1;i<=TEACHING_ROLES.length;i++){const key=TEACHING_ROLES[(start+i)%TEACHING_ROLES.length][0];if(profile.roles[key].tile===null){selectRole(key);return;}}message(T("全部位置已经填写，可切换预览形状检查。"));});
+    listen(refs.example,'click',()=>{if(!/^Outside(?:\.|$)/i.test(atlas.tilesetName))return;profile=makeProfile(atlas);profile.name=T("Outside {v}示例",{v:teachingTypeName(kind)});for(const [key,,tile] of TEACHING_ROLES)profile.roles[key].tile=tile;try{profile=checkProfile(profile,atlas);changed();message(T("已载入 Outside 示例；可点任意位置重新教学。"));}catch(error){message(error.message,true);}});
+    listen(refs.new,'click',async()=>{const key=storageKey;if(dirty){const ok=await ctx.ui.showConfirmDialog({title:T("新增教学"),message:T("当前式样有未保存的修改。放弃修改并新增空白式样？已保存的式样会保留。")});if(!ok||!alive||storageKey!==key)return;}
+      activeId=teachingId();profile=makeProfile(atlas);profile.name=T("新教学 {v}",{v:library.entries.length+1});role=kind==='round-forest'?'capTip':'ground';selectedCell=null;dirty=true;remember();sync();message(T("已新增独立的空白教学；填写名称和图块后点击“整体保存教学”。"));});
     listen(refs.save,'click',async()=>{
       if(!profile||saveBusy)return;const snapshot=cloneTeaching(profile),key=storageKey,id=activeId;
-      snapshot.name=snapshot.name.trim();if(!snapshot.name){message('请先填写教学式样名称。',true);return;}
-      if(library.entries.some(entry=>entry.id!==id&&entry.profile.name.trim().toLocaleLowerCase()===snapshot.name.toLocaleLowerCase())){message('已有同名教学式样，请换一个名称。',true);return;}
+      snapshot.name=snapshot.name.trim();if(!snapshot.name){message(T("请先填写教学式样名称。"),true);return;}
+      if(library.entries.some(entry=>entry.id!==id&&entry.profile.name.trim().toLocaleLowerCase()===snapshot.name.toLocaleLowerCase())){message(T("已有同名教学式样，请换一个名称。"),true);return;}
       const next=cloneTeaching(library),existing=next.entries.findIndex(entry=>entry.id===id);
       if(existing>=0)next.entries[existing].profile=snapshot;else next.entries.push({id,profile:snapshot});
       next.selectedId=id;saveBusy=true;sync();
-      try{await ctx.storage.set(key,next);onSaved(snapshot);if(alive&&storageKey===key){library=next;dirty=JSON.stringify(profile)!==JSON.stringify(snapshot);remember();message(teachingProgress(snapshot)===TEACHING_ROLES.length?'教学式样已保存。可在教学窗口和画笔下拉中选择。':'教学式样已保存；用到缺失映射的格子标红跳过。');}}
-      catch(error){message(`保存失败：${error.message}`,true);}finally{saveBusy=false;if(alive&&profile)sync();}
+      try{await ctx.storage.set(key,next);onSaved(snapshot);if(alive&&storageKey===key){library=next;dirty=JSON.stringify(profile)!==JSON.stringify(snapshot);remember();message(teachingProgress(snapshot)===TEACHING_ROLES.length?T("教学式样已保存。可在教学窗口和画笔下拉中选择。"):T("教学式样已保存；用到缺失映射的格子标红跳过。"));}}
+      catch(error){message(T("保存失败：{message}",{message:error.message}),true);}finally{saveBusy=false;if(alive&&profile)sync();}
     });
     listen(refs.jsonToggle,'click',()=>{refs.jsonArea.hidden=!refs.jsonArea.hidden;});
-    listen(refs.export,'click',()=>{refs.json.value=JSON.stringify(profile,null,2);message('已生成 JSON，可复制备份，也可导出到 Mod 文件夹。');});
-    listen(refs.exportFile,'click',async()=>{const snapshot=cloneTeaching(profile);try{await ctx.fs.mkdir('teaching-profiles');const file=`teaching-profiles/${kind}-${snapshot.atlas.tilesetId}-${activeId}.json`;await ctx.fs.writeModFile(file,JSON.stringify(snapshot,null,2));message(`已导出到 Mod 文件夹：${file}`);}catch(error){message(`导出失败：${error.message}；可使用“生成 JSON”复制备份。`,true);}});
-    listen(refs.import,'click',()=>{try{const candidate=checkProfile(JSON.parse(refs.json.value),atlas);activeId=teachingId();profile=candidate;changed();message('已作为新式样导入，请检查预览后保存教学。');}catch(error){message(`导入失败：${error.message}`,true);}});
+    listen(refs.export,'click',()=>{refs.json.value=JSON.stringify(profile,null,2);message(T("已生成 JSON，可复制备份，也可导出到 Mod 文件夹。"));});
+    listen(refs.exportFile,'click',async()=>{const snapshot=cloneTeaching(profile);try{await ctx.fs.mkdir('teaching-profiles');const file=`teaching-profiles/${kind}-${snapshot.atlas.tilesetId}-${activeId}.json`;await ctx.fs.writeModFile(file,JSON.stringify(snapshot,null,2));message(T("已导出到 Mod 文件夹：{file}",{file:file}));}catch(error){message(T("导出失败：{message}；可使用“生成 JSON”复制备份。",{message:error.message}),true);}});
+    listen(refs.import,'click',()=>{try{const candidate=checkProfile(JSON.parse(refs.json.value),atlas);activeId=teachingId();profile=candidate;changed();message(T("已作为新式样导入，请检查预览后保存教学。"));}catch(error){message(T("导入失败：{message}",{message:error.message}),true);}});
     const dispose=()=>{if(!alive){replacement?.();return;}remember();alive=false;++token;listeners.forEach(fn=>fn());reference.onload=null;root.remove();disposers.delete(dispose);};
     disposers.add(dispose);
-    for(const [value,title] of TEACHING_TYPES)refs.kind.add(new Option(title,value));refs.kind.value=kind;
-    refs.viewLayer.add(new Option('仅图层 3','top'));
+    const localeSub=ctx.i18n?.onChanged?.(()=>{if(!alive)return;const next=refs.kind.value;dispose();replacement=renderTeaching(host,next);});if(localeSub)listeners.push(()=>localeSub.dispose());
+    for(const [value,title] of TEACHING_TYPES)refs.kind.add(new Option(T(title),value));refs.kind.value=kind;
+    refs.viewLayer.add(new Option(T("仅图层 3"),'top'));
     listen(refs.kind,'change',()=>{const next=refs.kind.value;dispose();replacement=renderTeaching(host,next);});
     try{
       const sets=ctx.tileset.list();for(const set of sets)refs.tileset.add(new Option(`${set.name||set.tilesetName} (${set.id})`,String(set.id)));
       const active=ctx.map.info(ctx.editor.activeMapId())?.tilesetId||ctx.tileset.currentId?.()||sets[0]?.id;
-      if(!sets.length)throw Error('请先打开项目，再进入图块教学。');
+      if(!sets.length)throw Error(T("请先打开项目，再进入图块教学。"));
       refs.tileset.value=String(sets.some(s=>s.id===active)?active:sets[0].id);loadTileset(Number(refs.tileset.value));
     }catch(error){busy=true;busyUI();message(error.message,true);}
     return dispose;
@@ -519,7 +530,7 @@ function createTaughtMountain(profile, topology, snapshot) {
   const grounds=teachingGrounds(profile,snapshot);
   function resolve(tile){
     const role=roleById.get(tile.id),entry=profile.roles[role];
-    if(!entry)throw Error('教学样式缺少当前边角');
+    if(!entry)throw Error(T("教学样式缺少当前边角"));
     const baseRole=materialRole(role)?role:entry.base==='auto'?(tile.rock?'rock':'ground'):entry.base;
     const missing=[];if(typeof baseRole!=='number'&&profile.roles[baseRole].tile===null)missing.push(baseRole);if(!materialRole(role)&&entry.tile===null)missing.push(role);
     return {base:typeof baseRole==='number'?baseRole:profile.roles[baseRole].tile,edge:materialRole(role)?0:entry.tile,baseRole,missing};
@@ -560,15 +571,15 @@ function createTaughtMountain(profile, topology, snapshot) {
       const base=target.baseRole==='ground'&&grounds.has(before[0])?before[0]:target.base,edge=target.edge;
       if(before[0]===base&&before[1]===edge)continue;
       if(!accepted.has(k)&&((before[0]!==0&&!grounds.has(before[0]))||before[1]!==0)){
-        conflicts.set(k,{x,y,message:'该格不是当前样式的背景或山体，跳过'});continue;
+        conflicts.set(k,{x,y,message:T("该格不是当前样式的背景或山体，跳过")});continue;
       }
       if(read(2,x,y)!==0||snapshot.blocked?.has(k)||snapshot.events?.has(k)){
-        conflicts.set(k,{x,y,message:'该格有物件或事件，跳过'});continue;
+        conflicts.set(k,{x,y,message:T("该格有物件或事件，跳过")});continue;
       }
       renderCells.set(k,{x,y,base,edge});
       for(let layer=0;layer<2;layer++){const value=layer===0?base:edge;if(before[layer]!==value)changes.push({layer,x,y,old:before[layer],value});}
     }
-    return {changes,renderCells,conflicts,footprint,level:1,feature:`单层山体 · ${profile.name||'教学样式'}`};
+    return {changes,renderCells,conflicts,footprint,level:1,feature:T("单层山体 · {v}",{v:profile.name||T("教学样式")})};
   }};
 }
 
@@ -679,7 +690,7 @@ function createTaughtTerrain(profile,snapshot,engines,terrain,count=2,foundation
   if(id===0)return 0;
   if(z===0&&id>=385&&id<=389&&(id===385||!forward[0].has(id)))return singleTeaching(profile.kind)&&grounds.has(id)?id:grounds.has(read(0,x,y))?read(0,x,y):ground;
   if(id<0)return -id-1;
-  const value=forward[z]?.get(id);if(value===undefined)throw Error(`教学缺少图层 ${z+1} 的图块角色 ${id}`);return value;
+  const value=forward[z]?.get(id);if(value===undefined)throw Error(T("教学缺少图层 {v} 的图块角色 {id}",{v:z+1,id:id}));return value;
  };
  return {levels:proxy.recognized?.levels,plan(brush,origin){
   let raw;
@@ -712,7 +723,7 @@ function createTaughtTerrain(profile,snapshot,engines,terrain,count=2,foundation
    renderCells.set(k,{x:c.x,y:c.y,base:values[0],edge:values[1],top:values[2]});
    for(let z=0;z<3;z++)if(values[z]!==read(z,c.x,c.y))changes.push({layer:z,x:c.x,y:c.y,old:read(z,c.x,c.y),value:values[z]});
   }
-  return {...raw,changes,renderCells,canonicalCells:new Map([...touched].map(([key,cell])=>[key,cell.ids])),feature:`${multiTeaching(profile.kind)?`${count} 层 `:''}${terrainNames[terrain]} · ${profile.name}`};
+  return {...raw,changes,renderCells,canonicalCells:new Map([...touched].map(([key,cell])=>[key,cell.ids])),feature:`${multiTeaching(profile.kind)?T("{count} 层 ",{count:count}):''}${T(terrainNames[terrain])} · ${profile.name}`};
  }};
 }
 
@@ -757,22 +768,22 @@ function createLayeredTaughtTerrain(profile,snapshot,engines,terrain,count=2,fou
    for(let z=0;z<3;z++){
     const id=ids[z],name=roleFor(z,id);if(!name||id===0||id<0)continue;
     const value=values[z],target=placedLayer(profile,name);
-    if(value===null||value===undefined){problem=`教学缺少“${name}”映射`;break;}
-    if(!snapshot.arrays.has(target)){problem=`图层 ${target+1} 在当前地图不存在`;break;}
+    if(value===null||value===undefined){problem=T("教学缺少“{name}”映射",{name:name});break;}
+    if(!snapshot.arrays.has(target)){problem=T("图层 {v} 在当前地图不存在",{v:target+1});break;}
     const prior=placed.get(target);
-    if(prior&&prior.name!=='ground'&&name!=='ground'&&prior.value!==value){problem=`图层 ${target+1} 同一格需要两个不同图块`;break;}
+    if(prior&&prior.name!=='ground'&&name!=='ground'&&prior.value!==value){problem=T("图层 {v} 同一格需要两个不同图块",{v:target+1});break;}
     if(!prior||prior.name==='ground'||name!=='ground')placed.set(target,{name,value});
    }
    if(!problem)for(const [target,{name,value}] of placed){
     const current=desired.get(target);
-    if(current!==0&&current!==value&&current!==original.get(target)&&name!=='ground'){problem=`图层 ${target+1} 已有其他图块`;break;}
+    if(current!==0&&current!==value&&current!==original.get(target)&&name!=='ground'){problem=T("图层 {v} 已有其他图块",{v:target+1});break;}
     const source=original.get(target),owned=(matches.get(k)||[]).some(role=>placedLayer(profile,role)===target);
     if(source!==0&&source!==value&&!owned&&!(target===0&&source>=385&&source<=389)&&name!=='ground'){
-     problem=`图层 ${target+1} 已有其他图块`;break;
+     problem=T("图层 {v} 已有其他图块",{v:target+1});break;
     }
     desired.set(target,value);
    }
-   if(problem){conflicts.set(k,{x,y,message:`${problem}，跳过此格`});continue;}
+   if(problem){conflicts.set(k,{x,y,message:T("{problem}，跳过此格",{problem:problem})});continue;}
    for(const [z,value] of desired)if(value!==original.get(z))changes.push({layer:z,x,y,old:original.get(z),value});
    renderCells.set(k,{x,y,layers:desired});
   }
@@ -801,11 +812,11 @@ function taughtContextKey(){
 }
 async function loadNativeTeachingImage(id){
  const info=ctxRef.tileset.info(id),gameRoot=ctxRef.editor.gameRoot();
- if(!info||!gameRoot)throw Error('请先打开游戏项目');
+ if(!info||!gameRoot)throw Error(T("请先打开游戏项目"));
  const invoke=window.__TAURI__?.core?.invoke;
- if(invoke){const bytes=await invoke('get_tileset_image',{gameRoot,tilesetName:info.tilesetName});if(!bytes?.length)throw Error('图块图片为空，请检查素材文件');return new Blob([new Uint8Array(bytes)],{type:'image/png'});}
- await hostReady;if(!hostBridge||typeof hostBridge.renderer.h!=='function')throw Error('Maker Studio 1.7.1 图块兼容接口尚未就绪');
- return hostBridge.renderer.h(gameRoot,info.tilesetName);
+ if(!invoke)throw Error(T("当前宿主没有可用的图块读取接口"));
+ const bytes=await invoke('get_tileset_image',{gameRoot,tilesetName:info.tilesetName});if(!bytes?.length)throw Error(T("图块图片为空，请检查素材文件"));
+ return new Blob([new Uint8Array(bytes)],{type:'image/png'});
 }
 function syncTaughtStyles(){
   const kind=currentTeachingKind();
@@ -820,15 +831,15 @@ function syncTaughtStyles(){
   if(taughtChoice!=='default'&&!selected&&!taughtLoading){taughtChoice='default';taughtChoices[kind]='default';}
   taughtProfile=selected?.profile||null;taughtError=taughtErrors[taughtChoice.startsWith('multi-saved:')?companion:kind]||'';
   if(!panelRefs?.taughtStyle)return;
-  const select=panelRefs.taughtStyle,options=[new Option(kind==='grass-single-mountain'?'默认草地山体':kind==='grass-multi-mountain'?'默认草地多层山体':kind==='multi-mountain'?'默认多层山体':kind==='single-mountain'?'默认岩山（原样式）':kind==='road'?'默认道路（下方选择颜色）':kind==='round-forest'?'默认圆冠林':'默认高松林','default')];
+  const select=panelRefs.taughtStyle,options=[new Option(kind==='grass-single-mountain'?T("默认草地山体"):kind==='grass-multi-mountain'?T("默认草地多层山体"):kind==='multi-mountain'?T("默认多层山体"):kind==='single-mountain'?T("默认岩山（原样式）"):kind==='road'?T("默认道路（下方选择颜色）"):kind==='round-forest'?T("默认圆冠林"):T("默认高松林"),'default')];
   const count=taughtProfile?teachingRoles(taughtProfile.kind).length:kind?teachingRoles(kind).length:0;
-  const label=p=>{const count=teachingRoles(p.kind).length;return (p.name||'已保存教学')+(teachingProgress(p)===count?'':`（已填 ${teachingProgress(p)}/${count}）`);};
+  const label=p=>{const count=teachingRoles(p.kind).length;return (p.name||T("已保存教学"))+(teachingProgress(p)===count?'':T("（已填 {v}/{count}）",{v:teachingProgress(p),count:count}));};
   for(const entry of primary)options.push(new Option(label(entry.profile),`saved:${entry.id}`));
-  for(const entry of multi)options.push(new Option(label(entry.profile)+' · 沿用多层样式',`multi-saved:${entry.id}`));
-  if(taughtLoading&&taughtChoice!=='default'&&!selected){const option=new Option('正在读取教学式样…',taughtChoice);option.disabled=true;options.push(option);}
+  for(const entry of multi)options.push(new Option(label(entry.profile)+T(" · 沿用多层样式"),`multi-saved:${entry.id}`));
+  if(taughtLoading&&taughtChoice!=='default'&&!selected){const option=new Option(T("正在读取教学式样…"),taughtChoice);option.disabled=true;options.push(option);}
  select.replaceChildren(...options);select.value=taughtChoice;select.disabled=taughtLoading;
  panelRefs.taughtRefresh.disabled=taughtLoading;
-  panelRefs.taughtHint.textContent=taughtLoading?'正在读取已保存的教学…':taughtError?`读取失败：${taughtError}`:taughtProfile?teachingProgress(taughtProfile)===count?(taughtChoice.startsWith('multi-saved:')?'沿用多层教学的台面和岩壁，用于顶部叠加、扩展及擦除高台。':singleTeaching(kind)?'本套教学共用于单层、叠加、扩展、下挖及擦除；按落笔位置判断当前高度。':'整套教学已载入，选择后启用画笔。'):'未填完也可启用：用到缺失映射的格子标红跳过，其余正常绘制。':'尚无已保存教学；请先在图块教学窗口填写并整体保存。';
+  panelRefs.taughtHint.textContent=taughtLoading?T("正在读取已保存的教学…"):taughtError?T("读取失败：{taughtError}",{taughtError:taughtError}):taughtProfile?teachingProgress(taughtProfile)===count?(taughtChoice.startsWith('multi-saved:')?T("沿用多层教学的台面和岩壁，用于顶部叠加、扩展及擦除高台。"):singleTeaching(kind)?T("本套教学共用于单层、叠加、扩展、下挖及擦除；按落笔位置判断当前高度。"):T("整套教学已载入，选择后启用画笔。")):T("未填完也可启用：用到缺失映射的格子标红跳过，其余正常绘制。"):T("尚无已保存教学；请先在图块教学窗口填写并整体保存。");
  panelRefs.taughtRow.style.display=kind?'block':'none';
  if(kind){
   const needGroundSample=taughtChoice!=='default'&&taughtProfile?.roles.ground.tile===null;
@@ -859,33 +870,33 @@ async function refreshTaughtStyles(force=false){
 }
 function selectTaughtStyle(value){
   cancelStroke();taughtChoice=value.startsWith('multi-saved:')&&platformTeachingTerrain()?value:value.startsWith('saved:')?value:'default';taughtChoices[currentTeachingKind()]=taughtChoice;mode='idle';hover=null;
- syncTaughtStyles();status(taughtChoice!=='default'?`已选择 ${taughtProfile?.name||'教学样式'}；启用画笔后绘制。`:'已选择默认样式。');redraw();
+ syncTaughtStyles();status(taughtChoice!=='default'?T("已选择 {v}；启用画笔后绘制。",{v:taughtProfile?.name||T("教学样式")}):T("已选择默认样式。"));redraw();
 }
 function disposeTaughtStyles(){++taughtEpoch;taughtChoice='default';taughtProfile=null;taughtProfiles={};taughtErrors={};taughtChoices={};taughtContext='';taughtLoading=false;taughtError='';}
 
 let tileTeaching=null;
-// 1.7.1 的公开 beginUndoGroup 丢失跨层归属；使用宿主自己的批量事务与原生撤销栈。
-// 不替换宿主方法、不拦截 Ctrl+Z、不另建撤销栈。版本不匹配时禁止落笔。
-let hostBridge=null,hostReady=null,liveCanvas=null,hostEpoch=0;
-async function loadHostBridge(ctx){
-  let version=ctx.editor.version();
-  // 宿主异步读取版本号，首次启动可能暂时为空。
-  for(let n=0;!version&&n<100;n++){await new Promise(resolve=>setTimeout(resolve,50));version=ctx.editor.version();}
-  if(version!=='1.7.1')return Promise.reject(Error(`本修正版只核对了 Maker Studio 1.7.1，当前为 ${version}；已停止绘图以免损坏撤销。`));
-  const script=[...document.querySelectorAll('script[type="module"][src]')].find(s=>/\/index-Bhx3F5kX\.js(?:\?|$)/.test(s.src));
-  if(!script)return Promise.reject(Error('无法识别 1.7.1 的运行模块，已停止绘图。'));
-  return Promise.all([
-    import(new URL('./editor-store-CEa4Ej4i.js',script.src).href),
-    import(new URL('./tile-renderer-D1N3vScA.js',script.src).href)
-  ]).then(([store,renderer])=>{
-    if(typeof store.u?.getState().applyTileChangesBatch!=='function'||typeof renderer.l!=='function')throw Error('当前宿主缺少所需跨层事务或图块缓存。');
-    return {store:store.u,renderer};
-  });
+// 公开 endUndoGroup（1.7.1–1.9.0）按 "x,y" 合并各层差异，丢失跨层归属，且会套用笔刷属性；
+// 因此使用宿主自己的批量事务 applyTileChangesBatch 与原生撤销栈。
+// 不替换宿主方法、不拦截 Ctrl+Z、不另建撤销栈。找不到该事务时禁止落笔。
+// 宿主模块文件名与导出名每个版本都会变，所以在已加载的模块中按接口形状查找，而不是按版本号。
+let hostBridge=null,liveCanvas=null,hostEpoch=0;
+async function loadHostBridge(){
+  const urls=new Set([...document.querySelectorAll('script[type="module"][src],link[rel="modulepreload"][href]')].map(e=>e.src||e.href));
+  for(const entry of performance.getEntriesByType('resource'))urls.add(entry.name);
+  const chunks=[...urls].filter(u=>{try{const url=new URL(u);return url.origin===location.origin&&url.pathname.endsWith('.js');}catch{return false;}})
+    .sort((a,b)=>/store/.test(b)-/store/.test(a));
+  for(const url of chunks){
+    let module;try{module=await import(url);}catch{continue;}
+    for(const value of Object.values(module)){
+      try{if(typeof value?.setState==='function'&&typeof value.getState?.().applyTileChangesBatch==='function')return {store:value};}catch{}
+    }
+  }
+  throw Error(T("当前宿主缺少所需跨层事务，已停止绘图以免损坏撤销。"));
 }
 function nativeTransaction(mapId,changes,label){
-  if(!hostBridge)throw Error('宿主兼容模块尚未准备好，请稍后落笔。');
+  if(!hostBridge)throw Error(T("宿主兼容模块尚未准备好，请稍后落笔。"));
   const store=hostBridge.store,before=store.getState().maps[mapId];
-  if(!before)throw Error('当前地图已关闭');
+  if(!before)throw Error(T("当前地图已关闭"));
   const groups=new Map();
   for(const c of changes){if(!groups.has(c.layer))groups.set(c.layer,new Map());groups.get(c.layer).set(`${c.x},${c.y}`,c.value);}
   try{
@@ -893,7 +904,7 @@ function nativeTransaction(mapId,changes,label){
   }catch(error){
     // 同步事务失败时恢复原生数据、属性和两条历史栈，不制造额外撤销步骤。
     store.setState(state=>({maps:{...state.maps,[mapId]:before}}));
-    throw Error(`提交失败，已恢复这一笔之前的地图及撤销记录：${error.message}`);
+    throw Error(T("提交失败，已恢复这一笔之前的地图及撤销记录：{message}",{message:error.message}));
   }
 }
 function livePreview(){
@@ -943,8 +954,8 @@ function raster(footprint,width,height){
   for(const k of footprint){
     const [x,y]=xy(k),n=has(x,y-1),e=has(x+1,y),s=has(x,y+1),w=has(x-1,y);
     const issue=message=>errors.set(k,{x,y,message});
-    if(x<0||y<0||x>=width||y>=height)issue('山体超出地图');
-    if((!n&&!s)||(!e&&!w))issue('此处过窄，无法同时收住两侧边缘，请加宽');
+    if(x<0||y<0||x>=width||y>=height)issue(T("山体超出地图"));
+    if((!n&&!s)||(!e&&!w))issue(T("此处过窄，无法同时收住两侧边缘，请加宽"));
     let id=1177;
     if(!n)id=!w?1168:!e?1170:1169;
     else if(!s)id=!w?1184:!e?1186:1185;
@@ -952,7 +963,7 @@ function raster(footprint,width,height){
     else if(!e)id=1178;
     else{
       const missing=[[x-1,y-1,1201],[x+1,y-1,1200],[x-1,y+1,1193],[x+1,y+1,1192]].filter(([a,b])=>!has(a,b));
-      if(missing.length>1)issue('此处有多个内角挤在一格，请加宽');
+      if(missing.length>1)issue(T("此处有多个内角挤在一格，请加宽"));
       if(missing.length)id=missing[0][2];
     }
     tiles.set(k,{x,y,id,outer:OUTER.has(id)});
@@ -977,7 +988,7 @@ function combine(levels,width,height){
   }
   for(let level=1;level<rasters.length;level++)for(const [k,t] of rasters[level].tiles){
     // 每一级高台只在紧邻的下一级纯岩面内叠放；绘图层始终只有0/1。
-    if(rasters[level-1].tiles.get(k)?.id!==1177)errors.set(k,{x:t.x,y:t.y,message:'高台要画在当前台面内部，不能压住下一级边缘'});
+    if(rasters[level-1].tiles.get(k)?.id!==1177)errors.set(k,{x:t.x,y:t.y,message:T("高台要画在当前台面内部，不能压住下一级边缘")});
     tiles.set(k,{...t,rock:true,edge:t.id===1177?0:t.id});
   }
   return {levels,tiles,errors,footprint:lower.footprint};
@@ -1079,7 +1090,7 @@ function planConnection(snapshot,brush,old,ground){
   const conflicts=new Map(),changes=[],renderCells=new Map();
   const oldOuter=k=>{const [x,y]=xy(k);return grass(read(0,x,y))&&OUTER.has(read(1,x,y));};
   for(const [k,error] of result.errors)if(affected.has(k)&&(brush.has(k)||oldOuter(k)))conflicts.set(k,error);
-  for(const k of brush){const [x,y]=xy(k);if(x<0||y<0||x>=width||y>=height)conflicts.set(k,{x,y,message:'连接笔迹超出地图'});}
+  for(const k of brush){const [x,y]=xy(k);if(x<0||y<0||x>=width||y>=height)conflicts.set(k,{x,y,message:T("连接笔迹超出地图")});}
   for(const k of affected){
     if(!footprint.has(k))continue;
     const [x,y]=xy(k);if(x<0||y<0||x>=width||y>=height)continue;
@@ -1093,10 +1104,10 @@ function planConnection(snapshot,brush,old,ground){
     if(before[0]===after[0]&&before[1]===after[1])continue;
     if((!existing.has(k)&&(!grass(before[0])||before[1]!==0))||
        (existing.has(k)&&before[1]!==0&&!EDGES.has(before[1]))){
-      conflicts.set(k,{x,y,message:'连接处有不属于岩体的图块'});continue;
+      conflicts.set(k,{x,y,message:T("连接处有不属于岩体的图块")});continue;
     }
     if(read(2,x,y)!==0||snapshot.blocked?.has(k)||snapshot.events?.has(k)){
-      conflicts.set(k,{x,y,message:'物件或事件占用，不能覆盖'});continue;
+      conflicts.set(k,{x,y,message:T("物件或事件占用，不能覆盖")});continue;
     }
     renderCells.set(k,{x,y,base,edge:after[1]});
     for(let layer=0;layer<2;layer++)if(before[layer]!==after[layer])changes.push({layer,x,y,old:before[layer],value:after[layer]});
@@ -1117,7 +1128,7 @@ function plan(snapshot,brush,operation,ground=385,level=1,anchor=null){
     if(height<minimum&&anchor)return Features.planPlatform(snapshot,brush,ground,anchor,level==='lower');
     level=height>=minimum?(operation==='erase'?height:height+1):0;
   }
-  if(!Number.isInteger(level)||level<1)return {levels:old.levels,tiles:new Map(),footprint:old.levels[0],changes:[],renderCells:new Map(),conflicts:new Map([['landing',{x:anchor?.x,y:anchor?.y,message:'请在高台内部落笔'}]]),ground,operation,level};
+  if(!Number.isInteger(level)||level<1)return {levels:old.levels,tiles:new Map(),footprint:old.levels[0],changes:[],renderCells:new Map(),conflicts:new Map([['landing',{x:anchor?.x,y:anchor?.y,message:T("请在高台内部落笔")}]]),ground,operation,level};
   while(levels.length<level)levels.push(new Set());
   const selected=levels[level-1];
   for(const k of brush){if(operation==='erase')selected.delete(k);else selected.add(k);}
@@ -1135,19 +1146,19 @@ function plan(snapshot,brush,operation,ground=385,level=1,anchor=null){
     const after=[base,edge];
     if(before[0]===after[0]&&before[1]===after[1])continue;
     if(!old.accepted.has(k)&&(old.foreign.has(k)||(!grass(before[0])&&before[0]!==0)||before[1]!==0)){
-      conflicts.set(k,{x,y,message:'原有地形不符合此山体模板，不能覆盖'});continue;
+      conflicts.set(k,{x,y,message:T("原有地形不符合此山体模板，不能覆盖")});continue;
     }
     if(read(2,x,y)!==0||snapshot.blocked?.has(k)||snapshot.events?.has(k)){
-      conflicts.set(k,{x,y,message:'物件或事件占用，不能覆盖'});continue;
+      conflicts.set(k,{x,y,message:T("物件或事件占用，不能覆盖")});continue;
     }
     renderCells.set(k,{x,y,base,edge:after[1]});
     for(let layer=0;layer<2;layer++)if(before[layer]!==after[layer])changes.push({layer,x,y,old:before[layer],value:after[layer]});
   }
   if(operation==='erase')for(const k of brush)if(old.foreign.has(k)){
-    const [x,y]=xy(k);conflicts.set(k,{x,y,message:'此处不是受支持的单双层山体，请保留原地形'});
+    const [x,y]=xy(k);conflicts.set(k,{x,y,message:T("此处不是受支持的单双层山体，请保留原地形")});
   }
   if(level>1&&operation==='add'&&anchor&&read(1,anchor.x,anchor.y)!==0)
-    conflicts.set(key(anchor.x,anchor.y),{x:anchor.x,y:anchor.y,message:'请在岩壁围成的平坦台面内落笔，不能从边缘起笔'});
+    conflicts.set(key(anchor.x,anchor.y),{x:anchor.x,y:anchor.y,message:T("请在岩壁围成的平坦台面内落笔，不能从边缘起笔")});
   return {...next,previous,changes,renderCells,conflicts,ground,operation,level};
 }
 const Mountain={raster,combine,readRecognized,plan,borderStartDepth,key,xy,OUTER,EDGES};
@@ -1237,12 +1248,12 @@ function surfaceLevels(snapshot){
   };
 }
 function planPlatform(snapshot,brush,ground,origin,erase=false){
-  const {width,height,read}=snapshot,p=emptyPlan(snapshot,brush,erase?'擦除高台':'叠加高台');
+  const {width,height,read}=snapshot,p=emptyPlan(snapshot,brush,erase?T("擦除高台"):T("叠加高台"));
   const {x:ax,y:ay}=origin,inside=(x,y)=>x>=0&&y>=0&&x<width&&y<height;
   const at=surfaceLevels(snapshot),current=inside(ax,ay)?at(ax,ay):0;
   p.level=erase?current:current+1;
   if(current<(erase?2:1)||read(0,ax,ay)!==1177||read(1,ax,ay)!==0){
-    conflict(p.conflicts,ax,ay,'请在岩壁围成的平坦台面内起笔');return p;
+    conflict(p.conflicts,ax,ay,T("请在岩壁围成的平坦台面内起笔"));return p;
   }
   const existing=new Set();
   if(erase){
@@ -1254,17 +1265,17 @@ function planPlatform(snapshot,brush,ground,origin,erase=false){
       }
     }
     const hasParent=[...existing].some(k=>{const [x,y]=FXY(k);return [[0,-1],[1,0],[0,1],[-1,0]].some(([dx,dy])=>inside(x+dx,y+dy)&&!existing.has(FKEY(x+dx,y+dy))&&read(0,x+dx,y+dy)===1177&&read(1,x+dx,y+dy)===0&&at(x+dx,y+dy)===current-1);});
-    if(!hasParent){conflict(p.conflicts,ax,ay,'此处是多层山体底座，未找到可单独擦除的上层高台');return p;}
+    if(!hasParent){conflict(p.conflicts,ax,ay,T("此处是多层山体底座，未找到可单独擦除的上层高台"));return p;}
   }
   const next=erase?new Set([...existing].filter(k=>!brush.has(k))):new Set(brush);
   const rendered=Mountain.raster(next,width,height);
   for(const [k,c]of rendered.errors)p.conflicts.set(k,c);
   for(const k of erase?existing:brush){
-    const [x,y]=FXY(k);if(!inside(x,y)){conflict(p.conflicts,x,y,'高台超出地图');continue;}
+    const [x,y]=FXY(k);if(!inside(x,y)){conflict(p.conflicts,x,y,T("高台超出地图"));continue;}
     const edge=read(1,x,y),base=read(0,x,y);
-    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,'物件或事件占用，跳过这格');continue;}
+    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,T("物件或事件占用，跳过这格"));continue;}
     if(base!==1177||(erase?at(x,y)!==current:(edge!==0||at(x,y)!==current))){
-      conflict(p.conflicts,x,y,erase?'不能擦除更高一级台面或底层岩壁':'高台要画在同一级平坦台面内，跳过边缘格');continue;
+      conflict(p.conflicts,x,y,erase?T("不能擦除更高一级台面或底层岩壁"):T("高台要画在同一级平坦台面内，跳过边缘格"));continue;
     }
     const tile=rendered.tiles.get(k),target=tile&&tile.id!==1177?tile.id:0;
     if(edge===target)continue;
@@ -1274,27 +1285,27 @@ function planPlatform(snapshot,brush,ground,origin,erase=false){
 }
 
 function planDig(snapshot,brush,ground,origin){
-  const {width,height,read}=snapshot,p=emptyPlan(snapshot,brush,'下挖一层');
+  const {width,height,read}=snapshot,p=emptyPlan(snapshot,brush,T("下挖一层"));
   const anchor=origin||FXY(brush.values().next().value||'0,0').reduce((o,n,i)=>(o[i?'y':'x']=n,o),{});
   const x0=anchor.x,y0=anchor.y;
-  if(x0<0||y0<0||x0>=width||y0>=height){conflict(p.conflicts,x0,y0,'请在平坦岩面内起笔');return p;}
+  if(x0<0||y0<0||x0>=width||y0>=height){conflict(p.conflicts,x0,y0,T("请在平坦岩面内起笔"));return p;}
   const currentHeight=heightAt(snapshot,x0,y0);
   p.level=currentHeight-1;
   if(currentHeight<1||read(0,x0,y0)!==1177||read(1,x0,y0)!==0){
-    conflict(p.conflicts,x0,y0,'请在岩壁围成的平坦岩面内起笔；已有坑底可再下挖一层');return p;
+    conflict(p.conflicts,x0,y0,T("请在岩壁围成的平坦岩面内起笔；已有坑底可再下挖一层"));return p;
   }
   const floor=currentHeight===1?outsideGround(snapshot,x0,y0,ground):1177;
   p.ground=floor;
   const has=(x,y)=>brush.has(FKEY(x,y));
   for(const k of brush){
     const [x,y]=FXY(k);
-    if(x<0||y<0||x>=width||y>=height){conflict(p.conflicts,x,y,'下挖超出地图');continue;}
+    if(x<0||y<0||x>=width||y>=height){conflict(p.conflicts,x,y,T("下挖超出地图"));continue;}
     if(read(0,x,y)!==1177||read(1,x,y)!==0||heightAt(snapshot,x,y)!==currentHeight){
-      conflict(p.conflicts,x,y,'下挖笔迹必须留在同一级平坦岩面内');continue;
+      conflict(p.conflicts,x,y,T("下挖笔迹必须留在同一级平坦岩面内"));continue;
     }
-    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,'事件或第三层物件占用，不能下挖');continue;}
+    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,T("事件或第三层物件占用，不能下挖"));continue;}
     const n=has(x,y-1),e=has(x+1,y),s=has(x,y+1),w=has(x-1,y);
-    if((!n&&!s)||(!e&&!w)){conflict(p.conflicts,x,y,'坑至少宽、高各三格，才能围出内壁');continue;}
+    if((!n&&!s)||(!e&&!w)){conflict(p.conflicts,x,y,T("坑至少宽、高各三格，才能围出内壁"));continue;}
     let edge=0,base=floor;
     if(!n){edge=!w?1192:!e?1193:1185;}
     else if(!s){edge=floor===1177?1169:1200;base=1177;}
@@ -1304,7 +1315,7 @@ function planDig(snapshot,brush,ground,origin){
       // The one documented pit motif is axis-aligned. A diagonal cavity needs
       // different corner artwork, so stop instead of inventing a tile.
       const gaps=[[x-1,y-1],[x+1,y-1],[x-1,y+1],[x+1,y+1]].filter(([a,b])=>!has(a,b));
-      if(gaps.length)conflict(p.conflicts,x,y,'此凹角的下挖图块尚未在 Map042 验证，请改用方形画笔');
+      if(gaps.length)conflict(p.conflicts,x,y,T("此凹角的下挖图块尚未在 Map042 验证，请改用方形画笔"));
     }
     if(base===read(0,x,y)&&edge===read(1,x,y))continue;
     p.renderCells.set(k,{x,y,base,edge});
@@ -1355,7 +1366,7 @@ function waterTile(has,x,y){
   return 1097;
 }
 function planWater(snapshot,brush,ground,erase=false){
-  const {width,height,read}=snapshot,p=emptyPlan(snapshot,brush,erase?'擦除水坑':'绘制水坑');
+  const {width,height,read}=snapshot,p=emptyPlan(snapshot,brush,erase?T("擦除水坑"):T("绘制水坑"));
   ground=nearbyGround(snapshot,brush,ground);p.ground=ground;
   const outside=exteriorGround(snapshot);
   const old=new Set();
@@ -1391,10 +1402,10 @@ function planWater(snapshot,brush,ground,erase=false){
     if(!brush.has(k)&&!oldWater&&!oldBank&&!proposed.has(k))continue;
     const target=proposed.get(k);
     if(target===undefined&&!oldWater&&!oldBank)continue;
-    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,'事件或第三层物件占用，不能画水坑');continue;}
-    if(read(1,x,y)!==0){conflict(p.conflicts,x,y,'水坑只允许画在普通草地，不能压住第二层图块');continue;}
+    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,T("事件或第三层物件占用，不能画水坑"));continue;}
+    if(read(1,x,y)!==0){conflict(p.conflicts,x,y,T("水坑只允许画在普通草地，不能压住第二层图块"));continue;}
     if(!FGRASS(before)&&!oldWater&&!oldBank){
-      conflict(p.conflicts,x,y,'水坑只允许画在普通草地，不能覆盖山体或其他地形');continue;
+      conflict(p.conflicts,x,y,T("水坑只允许画在普通草地，不能覆盖山体或其他地形"));continue;
     }
     const value=target??ground;
     if(before===value)continue;
@@ -1402,31 +1413,31 @@ function planWater(snapshot,brush,ground,erase=false){
     p.changes.push({layer:0,x,y,old:before,value});
   }
   // Report incompatible cells; the shared commit path skips just those cells.
-  for(const k of brush){const [x,y]=FXY(k);if(x<0||y<0||x>=width||y>=height)conflict(p.conflicts,x,y,'水坑超出地图');}
+  for(const k of brush){const [x,y]=FXY(k);if(x<0||y<0||x>=width||y>=height)conflict(p.conflicts,x,y,T("水坑超出地图"));}
   for(const k of brush)if(!outside.has(k)){
-    const [x,y]=FXY(k);conflict(p.conflicts,x,y,'水坑只画在山体外的普通草地，不能画进下挖坑底');
+    const [x,y]=FXY(k);conflict(p.conflicts,x,y,T("水坑只画在山体外的普通草地，不能画进下挖坑底"));
   }
   return p;
 }
 function planExpand(snapshot,brush,ground,origin){
-  const {width,height,read}=snapshot,p=emptyPlan(snapshot,brush,'扩展高台');
+  const {width,height,read}=snapshot,p=emptyPlan(snapshot,brush,T("扩展高台"));
   const first=brush.values().next().value;
   const [fx,fy]=first?FXY(first):[-1,-1],anchor=origin||{x:fx,y:fy};
   const {x:ax,y:ay}=anchor,ak=FKEY(ax,ay);
-  if(ax<0||ay<0||ax>=width||ay>=height){conflict(p.conflicts,ax,ay,'请在已有高台的平坦岩面内起笔');return p;}
+  if(ax<0||ay<0||ax>=width||ay>=height){conflict(p.conflicts,ax,ay,T("请在已有高台的平坦岩面内起笔"));return p;}
   const recognized=snapshot.recognized||Mountain.readRecognized(snapshot);
   const localHeight=recognized.accepted.has(ak)?null:surfaceLevels(snapshot);
-  const level=localHeight?localHeight(ax,ay):heightAt(snapshot,ax,ay);p.level=level;p.feature=`扩展第 ${level} 级高台`;
+  const level=localHeight?localHeight(ax,ay):heightAt(snapshot,ax,ay);p.level=level;p.feature=T("扩展第 {level} 级高台",{level:level});
   if(level<2||read(0,ax,ay)!==1177||read(1,ax,ay)!==0){
-    conflict(p.conflicts,ax,ay,'请在已有高台的平坦岩面内起笔');return p;
+    conflict(p.conflicts,ax,ay,T("请在已有高台的平坦岩面内起笔"));return p;
   }
   if(recognized.accepted.has(ak)){
     const targetLevel=recognized.levels.reduce((n,c)=>n+Number(c.has(ak)),0);
-    if(targetLevel!==level){conflict(p.conflicts,ax,ay,'此高台的层级无法可靠识别');return p;}
+    if(targetLevel!==level){conflict(p.conflicts,ax,ay,T("此高台的层级无法可靠识别"));return p;}
     const planned=Mountain.plan({...snapshot,recognized},brush,'add',ground,level,null);
     planned.feature=p.feature;
-    for(const c of planned.conflicts.values())if(c.message==='高台要画在当前台面内部，不能压住下一级边缘')
-      c.message='请先扩宽下一级平坦岩面，再扩展这一层';
+    for(const c of planned.conflicts.values())if(c.message===T("高台要画在当前台面内部，不能压住下一级边缘"))
+      c.message=T("请先扩宽下一级平坦岩面，再扩展这一层");
     return planned;
   }
   // 手绘/已下挖的山体可能不能按完整模板回读。只在起笔台面的外沿
@@ -1454,15 +1465,15 @@ function planExpand(snapshot,brush,ground,origin){
   }
   for(const k of brush){
     const [x,y]=FXY(k);
-    if(x<0||y<0||x>=width||y>=height){conflict(p.conflicts,x,y,'扩展超出地图');continue;}
-    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,'事件或第三层物件占用，不能扩展');continue;}
+    if(x<0||y<0||x>=width||y>=height){conflict(p.conflicts,x,y,T("扩展超出地图"));continue;}
+    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,T("事件或第三层物件占用，不能扩展"));continue;}
     if(old.has(k)){
-      if(at(x,y)>level)conflict(p.conflicts,x,y,'不能覆盖更高一级的岩壁或台面');
+      if(at(x,y)>level)conflict(p.conflicts,x,y,T("不能覆盖更高一级的岩壁或台面"));
       continue;
     }
-    if(!exterior.has(k)){conflict(p.conflicts,x,y,'不能用扩展高台填平下挖坑');continue;}
+    if(!exterior.has(k)){conflict(p.conflicts,x,y,T("不能用扩展高台填平下挖坑"));continue;}
     if(read(0,x,y)!==1177||read(1,x,y)!==0||at(x,y)!==level-1)
-      conflict(p.conflicts,x,y,'请先扩宽下一级平坦岩面，再扩展这一层');
+      conflict(p.conflicts,x,y,T("请先扩宽下一级平坦岩面，再扩展这一层"));
   }
   const footprint=new Set([...old,...brush]);
   const rendered=Mountain.raster(footprint,width,height),affected=new Set();
@@ -1478,13 +1489,13 @@ function planExpand(snapshot,brush,ground,origin){
     const edge=target===1177?0:target;
     if(old.has(k)&&at(x,y)>level)continue;
     if(old.has(k)&&before!==0&&!Mountain.EDGES.has(before)){
-      conflict(p.conflicts,x,y,'已有岩壁图块不属于已验证模板，不能覆盖');continue;
+      conflict(p.conflicts,x,y,T("已有岩壁图块不属于已验证模板，不能覆盖"));continue;
     }
     if(old.has(k)&&before!==edge){
       const touchesOutside=[[0,-1],[1,0],[0,1],[-1,0]].some(([dx,dy])=>exterior.has(FKEY(x+dx,y+dy)));
-      if(!touchesOutside){conflict(p.conflicts,x,y,'扩展会改变内部坑壁或相邻高台，请缩小笔迹');continue;}
+      if(!touchesOutside){conflict(p.conflicts,x,y,T("扩展会改变内部坑壁或相邻高台，请缩小笔迹"));continue;}
     }
-    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,'事件或第三层物件占用，不能扩展');continue;}
+    if(occupied(snapshot,x,y)){conflict(p.conflicts,x,y,T("事件或第三层物件占用，不能扩展"));continue;}
     const base=1177;
     if(read(0,x,y)===base&&before===edge)continue;
     p.renderCells.set(k,{x,y,base,edge});
@@ -1554,7 +1565,7 @@ function createGrassMountain(Mountain,Features){
       renderCells.set(k,{x,y,base:topTile,edge:capTile});
       changes.push({layer:1,x,y,old:1201,value:capTile});
     }
-    return {...plan,changes,renderCells,feature:plan.feature?.replace('山体','草地山地')};
+    return {...plan,changes,renderCells,feature:plan.feature?.replace(new RegExp(T("山体"),'i'),T("草地山地"))};
   }
   function context(snapshot){return snapshot.grassContext||prepare(snapshot);}
   function plan(snapshot,brush,operation,ground=385,level=1,anchor=null){
@@ -1607,13 +1618,13 @@ function createSurfaceTools(){
   function sandTile(set,s,x,y){
     const has=(a,b)=>atBoundary(set,s,a,b);
     const n=has(x,y-1),e=has(x+1,y),south=has(x,y+1),w=has(x-1,y);
-    if((!n&&!south)||(!e&&!w))return {error:'沙地过窄；请至少画出两格宽的连续区域'};
+    if((!n&&!south)||(!e&&!w))return {error:T("沙地过窄；请至少画出两格宽的连续区域")};
     if(!n)return {id:!w?537:!e?539:538};
     if(!south)return {id:!w?553:!e?555:554};
     if(!w)return {id:545};
     if(!e)return {id:547};
     const holes=[[-1,-1,558],[1,-1,556],[-1,1,542],[1,1,540]].filter(([dx,dy])=>!has(x+dx,y+dy));
-    if(holes.length>1)return {error:'此格有多个内凹角，Map023 没有对应的已验证拼法；请加宽沙地'};
+    if(holes.length>1)return {error:T("此格有多个内凹角，Map023 没有对应的已验证拼法；请加宽沙地")};
     return {id:holes[0]?.[2]??546};
   }
   function nearbyGrass(s,x,y,fallback){
@@ -1633,9 +1644,9 @@ function createSurfaceTools(){
     return bits;
   };
   function planSand(s,brush,ground=385,erase=false,style='yellow'){
-    const p=plan(brush,erase?'擦除道路':'绘制道路');
+    const p=plan(brush,erase?T("擦除道路"):T("绘制道路"));
     const styleIds=roadStyles[style];
-    if(!styleIds)throw Error(`未知道路样式：${style}`);
+    if(!styleIds)throw Error(T("未知道路样式：{style}",{style:style}));
     const offset=roadOffsets[style],isCity=style==='city';
     const old=maskFrom(s,0,id=>styleIds.has(id)||(isCity&&cityTransitions.has(id))),next=new Set(old);
     const requested=new Set();
@@ -1646,7 +1657,7 @@ function createSurfaceTools(){
       // Keep the original brush topology even where a higher layer blocks a
       // write: the red cell stays untouched and neighbors do not close its gap.
       if(!erase&&(read(s,1,x,y)!==0||read(s,2,x,y)!==0||s.blocked?.has(k))){
-        conflict(p,x,y,'该格有第二层或更高图层的图块，跳过');
+        conflict(p,x,y,T("该格有第二层或更高图层的图块，跳过"));
       }
       const special=isCity&&cityTransitions.has(read(s,0,x,y));
       if(erase&&!special)next.delete(k);
@@ -1655,7 +1666,7 @@ function createSurfaceTools(){
     const affected=around(requested);
     for(const k of requested){const [x,y]=xy(k);
       const base=read(s,0,x,y);
-      if(erase&&isCity&&cityTransitions.has(base))conflict(p,x,y,'此处是城市道路特殊缺口，暂不支持自动擦除');
+      if(erase&&isCity&&cityTransitions.has(base))conflict(p,x,y,T("此处是城市道路特殊缺口，暂不支持自动擦除"));
     }
     for(const k of affected){const [x,y]=xy(k);
       if(!inside(s,x,y)||(!old.has(k)&&!next.has(k)))continue;
@@ -1667,7 +1678,7 @@ function createSurfaceTools(){
       const value=next.has(k)&&!unchanged?picked.id+offset:picked.id;
       if(value===base)continue;
       if(read(s,1,x,y)!==0||read(s,2,x,y)!==0||s.blocked?.has(k)){
-        conflict(p,x,y,'该格有第二层或更高图层的图块，跳过');continue;
+        conflict(p,x,y,T("该格有第二层或更高图层的图块，跳过"));continue;
       }
       p.changes.push({layer:0,x,y,old:base,value});
       p.renderCells.set(k,{x,y,base:value,edge:0});
@@ -1696,7 +1707,7 @@ function createSurfaceTools(){
   }
   function fenceTile(s,old,next,x,y,pathSide){
     const k=key(x,y),[n,e,south,w]=sig(next,x,y),degree=Number(n)+Number(e)+Number(south)+Number(w);
-    if(degree>3)return {error:'此处四向交叉没有已验证的图块，请分开绘制'};
+    if(degree>3)return {error:T("此处四向交叉没有已验证的图块，请分开绘制")};
     const oldId=read(s,1,x,y);
     if(old.has(k)&&sigText(sig(old,x,y))===sigText([n,e,south,w]))return {id:oldId};
     const own=sideFromId(oldId);
@@ -1717,7 +1728,7 @@ function createSurfaceTools(){
     if(!n&&e&&w&&south)return {id:side==='east'?1660:1659};
     // Map039/040 (7,11)=1666 branches east from the east-facing vertical line.
     if(n&&e&&south&&!w&&side==='east')return {id:1666};
-    if(degree>2)return {error:'此三向接点尚无已验证的图块，请调整连接方向'};
+    if(degree>2)return {error:T("此三向接点尚无已验证的图块，请调整连接方向")};
     if(n&&south)return {id:side==='east'?1664:1665};
     if(e&&w)return {id:1681};
     if(e&&south)return {id:side==='east'?1658:1662};
@@ -1731,19 +1742,19 @@ function createSurfaceTools(){
     return {id:1681};
   }
   function planFence(s,brush,path=[],insideSide='right',erase=false){
-    const p=plan(brush,erase?'擦除栅栏':'绘制栅栏');
+    const p=plan(brush,erase?T("擦除栅栏"):T("绘制栅栏"));
     const old=maskFrom(s,1,fenceArtwork),next=new Set(old),direction=directedSides(path,insideSide);
     for(const k of brush){if(erase)next.delete(k);else next.add(k);}
-    for(const k of direction.errors){const [x,y]=xy(k);conflict(p,x,y,'笔画在这里折返，栅栏内侧方向不一致');}
+    for(const k of direction.errors){const [x,y]=xy(k);conflict(p,x,y,T("笔画在这里折返，栅栏内侧方向不一致"));}
     const affected=around(brush);
     for(const k of brush){const [x,y]=xy(k);
-      if(!inside(s,x,y)){conflict(p,x,y,'栅栏超出地图');continue;}
+      if(!inside(s,x,y)){conflict(p,x,y,T("栅栏超出地图"));continue;}
       if(erase)continue;
       const base=read(s,0,x,y),top=read(s,1,x,y);
       if(fenceArtwork(top))continue; // Existing Map028 fences may sit under a third-layer tree.
-      if(!fenceGround(base))conflict(p,x,y,'栅栏目前只支持草地、沙地和水岸地面');
-      if(top!==0&&!fenceArtwork(top))conflict(p,x,y,'第二层已有其他图块，不能覆盖');
-      if(occupied(s,x,y))conflict(p,x,y,'第三层图块或事件占用，不能画栅栏');
+      if(!fenceGround(base))conflict(p,x,y,T("栅栏目前只支持草地、沙地和水岸地面"));
+      if(top!==0&&!fenceArtwork(top))conflict(p,x,y,T("第二层已有其他图块，不能覆盖"));
+      if(occupied(s,x,y))conflict(p,x,y,T("第三层图块或事件占用，不能画栅栏"));
     }
     for(const k of affected){const [x,y]=xy(k);
       if(!inside(s,x,y)||(!old.has(k)&&!next.has(k)))continue;
@@ -1752,7 +1763,7 @@ function createSurfaceTools(){
       const value=selected.id;
       if(value===before)continue;
       if(!fenceGround(read(s,0,x,y))||occupied(s,x,y)){
-        conflict(p,x,y,'栅栏接缝处地面或上层被其他图块占用');continue;
+        conflict(p,x,y,T("栅栏接缝处地面或上层被其他图块占用"));continue;
       }
       p.changes.push({layer:1,x,y,old:before,value});
       // Draw ground first to clear the old fence during a held-stroke preview.
@@ -1790,14 +1801,14 @@ function createMultiMountain(){
     if(!has(x,y))continue;
     const n=has(x,y-1),e=has(x+1,y),s=has(x,y+1),w=has(x-1,y),k=key(x,y);
     let edge=0;
-    if((!n&&!s)||(!e&&!w))errors.set(k,{x,y,message:'这格过窄，留给手工调整'});
+    if((!n&&!s)||(!e&&!w))errors.set(k,{x,y,message:T("这格过窄，留给手工调整")});
     if(!n)edge=!w?1168:!e?1170:1169;
     else if(!s)edge=!w?1184:!e?1186:1185;
     else if(!w)edge=1176;
     else if(!e)edge=1178;
     else{
      const missing=[[x-1,y-1,1169],[x+1,y-1,1169],[x-1,y+1,1193],[x+1,y+1,1192]].filter(([a,b])=>!has(a,b));
-     if(missing.length>1)errors.set(k,{x,y,message:'多个转角挤在同一格，留给手工调整'});
+     if(missing.length>1)errors.set(k,{x,y,message:T("多个转角挤在同一格，留给手工调整")});
      if(missing.length)edge=missing[0][2];
     }
     if(isGrass&&edge===1169)edge=1233;
@@ -1870,8 +1881,8 @@ function createMultiMountain(){
  }
  function plan(snapshot,brush,ground,count,isGrass){
   const {width,height,read}=snapshot;
-  const result={changes:[],renderCells:new Map(),conflicts:new Map(),feature:`${count} 层${isGrass?'草地':''}山体`,level:count,footprint:brush};
-  if(!Number.isSafeInteger(count)||count<2||count>width+height){result.conflicts.set('layers',{x:0,y:0,message:`层数请填 2～${width+height} 的整数`});return result;}
+  const result={changes:[],renderCells:new Map(),conflicts:new Map(),feature:isGrass?T("{count} 层草地山体",{count}):T("{count} 层山体",{count}),level:count,footprint:brush};
+  if(!Number.isSafeInteger(count)||count<2||count>width+height){result.conflicts.set('layers',{x:0,y:0,message:T("层数请填 2～{v} 的整数",{v:width+height})});return result;}
   const recognized=snapshot.multiRecognized||recognize(snapshot,count,isGrass);
   const touched=recognized.filter(c=>[...brush].some(k=>{const [x,y]=xy(k);return c.occupied.has(k)||[[1,0],[-1,0],[0,1],[0,-1]].some(([a,b])=>c.top.has(key(x+a,y+b)));}));
   const top=new Set(brush),owned=new Set();
@@ -1881,7 +1892,7 @@ function createMultiMountain(){
   for(const [k,t] of rendered.cells){
    const base=read(0,t.x,t.y),edge=read(1,t.x,t.y);
    if(read(2,t.x,t.y)!==0||snapshot.blocked?.has(k)||snapshot.events?.has(k)||(!owned.has(k)&&(!grass(base)||edge!==0))){
-    result.conflicts.set(k,{x:t.x,y:t.y,message:'已有地形或物件占用；跳过这格'});continue;
+    result.conflicts.set(k,{x:t.x,y:t.y,message:T("已有地形或物件占用；跳过这格")});continue;
    }
    // 保留原样例未改变的边界和基底；新格按层级铺草面或岩面。
    const same=owned.has(k)&&edge===t.edge&&!(t.openCorner&&base===1177);
@@ -1969,7 +1980,7 @@ function createForest() {
 
   function plan(s, brush, origin, ground = 385, erase = false) {
     const p = { changes: [], renderCells: new Map(), conflicts: new Map(), footprint: brush,
-      feature: erase ? '擦除高松林' : '绘制高松林', level: 0 };
+      feature: erase ? T("擦除高松林") : T("绘制高松林"), level: 0 };
     const original = s.forestRecognized || recognize(s);
     const oldSites = original.sites, sites = new Map(oldSites);
     const conflict = (x, y, message) => p.conflicts.set(key(x, y), { x, y, message });
@@ -1996,7 +2007,7 @@ function createForest() {
         if (!chosen) continue;
         if ([chosen.y, chosen.y + 1, chosen.y + 2].some(yy =>
           [chosen.x, chosen.x + 1].some(xx => inside(s, xx, yy) && s.events?.has(key(xx, yy))))) {
-          conflict(x, y, '树位上有事件，不能擦除'); continue;
+          conflict(x, y, T("树位上有事件，不能擦除")); continue;
         }
         removed.add(key(chosen.x, chosen.y));
       }
@@ -2019,11 +2030,11 @@ function createForest() {
         const k = key(site.x, site.y);
         if (sites.has(k)) continue;
         if ([...sites.values()].some(other => overlaps(site, other))) {
-          conflict(site.x, site.y, '这里与已有高松的树位错开一格，请沿原有树位继续画'); continue;
+          conflict(site.x, site.y, T("这里与已有高松的树位错开一格，请沿原有树位继续画")); continue;
         }
         let blocked = false;
         for (let yy = site.y; yy <= site.y + 2; yy++) for (let xx = site.x; xx <= site.x + 1; xx++) {
-          if (obstacle(xx, yy)) { blocked = true; conflict(xx, yy, '这里已有其他地形、树木或事件'); }
+          if (obstacle(xx, yy)) { blocked = true; conflict(xx, yy, T("这里已有其他地形、树木或事件")); }
         }
         if (!blocked) sites.set(k, site);
       }
@@ -2070,9 +2081,9 @@ function createForest() {
         const [x, y] = xy(k), before = read(s, z, x, y);
         const value = desired[z].has(k) ? desired[z].get(k) : z === 0 ? nearbyGrass(s, x, y, ground) : 0;
         if (before === value) continue;
-        if (s.events?.has(k)) { conflict(x, y, '此处有事件，不能修改高松'); continue; }
+        if (s.events?.has(k)) { conflict(x, y, T("此处有事件，不能修改高松")); continue; }
         if (!original.owned[z].has(k) && ((z === 0 && !grass(before)) || (z > 0 && before !== 0))) {
-          conflict(x, y, '此处已有其他图块，不能覆盖'); continue;
+          conflict(x, y, T("此处已有其他图块，不能覆盖")); continue;
         }
         p.changes.push({ layer: z, x, y, old: before, value });
       }
@@ -2147,7 +2158,7 @@ function createRoundForest() {
 
   function plan(s, brush, origin, ground = 385, erase = false) {
     const p = { changes: [], renderCells: new Map(), conflicts: new Map(), footprint: brush,
-      feature: erase ? '擦除圆冠林' : '绘制圆冠林', level: 0 };
+      feature: erase ? T("擦除圆冠林") : T("绘制圆冠林"), level: 0 };
     const original = s.roundRecognized || recognize(s);
     const oldSites = original.sites, sites = new Map(oldSites);
     const oldList = [...oldSites.values()], cursor = [...brush].map(xy);
@@ -2183,7 +2194,7 @@ function createRoundForest() {
         let event = false;
         for (let yy = chosen.y; yy <= chosen.y + 3; yy++) for (let xx = chosen.x; xx <= chosen.x + 2; xx++)
           if (inside(s, xx, yy) && s.events?.has(key(xx, yy))) event = true;
-        if (event) { conflict(x, y, '树位上有事件，不能擦除'); continue; }
+        if (event) { conflict(x, y, T("树位上有事件，不能擦除")); continue; }
         removed.add(key(chosen.x, chosen.y));
       }
       for (const k of removed) sites.delete(k);
@@ -2225,11 +2236,11 @@ function createRoundForest() {
         const k = key(site.x, site.y);
         if (sites.has(k)) continue;
         if ([...sites.values()].some(other => overlaps(site, other))) {
-          conflict(site.x, site.y, '这里与已有圆冠树错位，请沿现有树位继续画'); continue;
+          conflict(site.x, site.y, T("这里与已有圆冠树错位，请沿现有树位继续画")); continue;
         }
         let blocked = false;
         for (let yy = site.y; yy <= site.y + 3; yy++) for (let xx = site.x; xx <= site.x + 2; xx++)
-          if (obstacle(xx, yy)) { blocked = true; conflict(xx, yy, '这里已有其他地形、树木或事件'); }
+          if (obstacle(xx, yy)) { blocked = true; conflict(xx, yy, T("这里已有其他地形、树木或事件")); }
         if (blocked || !hasVisible(s, site.x, site.y, cap)) continue;
         sites.set(k, site);
       }
@@ -2249,9 +2260,9 @@ function createRoundForest() {
         const [x, y] = xy(k), before = read(s, z, x, y);
         const value = desired[z].has(k) ? desired[z].get(k) : z === 0 ? nearbyGrass(s, x, y, ground) : 0;
         if (before === value) continue;
-        if (s.events?.has(k)) { conflict(x, y, '此处有事件，不能修改圆冠林'); continue; }
+        if (s.events?.has(k)) { conflict(x, y, T("此处有事件，不能修改圆冠林")); continue; }
         if (!covered(z, x, y) && ((z === 0 && !grass(before)) || (z > 0 && before !== 0))) {
-          conflict(x, y, '此处已有其他图块，不能覆盖'); continue;
+          conflict(x, y, T("此处已有其他图块，不能覆盖")); continue;
         }
         p.changes.push({ layer: z, x, y, old: before, value });
       }
@@ -2272,13 +2283,16 @@ function createRoundForest() {
 
 const RoundForest=createRoundForest();
 
-const terrainNames = { multi: "多层山体", grassMulti: "草地多层山地", grass: "草地", mountain: "单层山体", upper: "叠加高台", erase: "擦除底座", eraseUpper: "擦除高台", expand: "扩展高台", dig: "下挖一层", grassMountain: "单层草地山地", grassUpper: "草地山地叠加高台", grassExpand: "草地山地扩展高台", grassDig: "草地山地下挖一层", grassEraseUpper: "草地山地擦除高台", grassErase: "草地山地擦除底座", water: "绘制水坑", eraseWater: "擦除水坑", sand: "绘制道路", eraseSand: "擦除道路", fence: "绘制栅栏", eraseFence: "擦除栅栏", forestPine: "绘制高松林", eraseForestPine: "擦除高松林", forestRound: "绘制圆冠林", eraseForestRound: "擦除圆冠林" };
+const terrainNames = { multi: N("多层山体"), grassMulti: N("草地多层山地"), grass: N("草地"), mountain: N("单层山体"), upper: N("叠加高台"), erase: N("擦除底座"), eraseUpper: N("擦除高台"), expand: N("扩展高台"), dig: N("下挖一层"), grassMountain: N("单层草地山地"), grassUpper: N("草地山地叠加高台"), grassExpand: N("草地山地扩展高台"), grassDig: N("草地山地下挖一层"), grassEraseUpper: N("草地山地擦除高台"), grassErase: N("草地山地擦除底座"), water: N("绘制水坑"), eraseWater: N("擦除水坑"), sand: N("绘制道路"), eraseSand: N("擦除道路"), fence: N("绘制栅栏"), eraseFence: N("擦除栅栏"), forestPine: N("绘制高松林"), eraseForestPine: N("擦除高松林"), forestRound: N("绘制圆冠林"), eraseForestRound: N("擦除圆冠林") };
 const isGrassMountainTerrain=t=>["grassMountain","grassUpper","grassExpand","grassDig","grassEraseUpper","grassErase"].includes(t);
-const atlasCache=new Map();
+const atlasCache=new Map(),atlasLoading=new Set();
 function requestAtlas(id){
-  if(!hostBridge)return;
-  const mapId=ctxRef.editor.activeMapId(),atlas=hostBridge.renderer.l(mapId);
-  if(atlas?.tilesetBitmap)atlasCache.set(id,{image:atlas.tilesetBitmap,columns:atlas.tilesetColumns});
+  if(!ctxRef||atlasCache.has(id)||atlasLoading.has(id))return;
+  const ctx=ctxRef;atlasLoading.add(id);
+  loadNativeTeachingImage(id).then(blob=>createImageBitmap(blob))
+    .then(image=>{if(ctxRef===ctx){atlasCache.set(id,{image});redraw();}})
+    .catch(error=>{if(ctxRef===ctx)report(error);})
+    .finally(()=>atlasLoading.delete(id));
 }
 function previewTile(drawing,info,atlas,id,x,y){
   if(id<384)return;
@@ -2294,11 +2308,11 @@ function renderGrassPreview(drawing,info){
 function mountainSnapshot(mapId, taught = false) {
   const map = ctxRef.map.info(mapId);
   const atlas = ctxRef.tileset?.info(map.tilesetId);
-  if (!atlas || (!taught && !/^Outside(?:\.png)?$/i.test(atlas.tilesetName))) throw Error("默认山体工具只支持 Outside；其他图块集请选择已保存的教学样式。");
+  if (!atlas || (!taught && !/^Outside(?:\.png)?$/i.test(atlas.tilesetName))) throw Error(T("默认山体工具只支持 Outside；其他图块集请选择已保存的教学样式。"));
   const layers = ctxRef.map.layers(mapId);
   if (![0,1,2].every(z => layers.some(l => l.index === z && l.kind === "native" && (z === 2 || l.visible))))
-    throw Error("请显示第一、第二原生图层后绘制山体。");
-  if (typeof ctxRef.events?.list !== "function") throw Error("编辑器未提供事件查询接口，不能检查占用位置。");
+    throw Error(T("请显示第一、第二原生图层后绘制山体。"));
+  if (typeof ctxRef.events?.list !== "function") throw Error(T("编辑器未提供事件查询接口，不能检查占用位置。"));
   const area=map.width*map.height, arrays=new Map(), blocked=new Set();
   for (const layer of layers.filter(l => l.kind === "native" || l.kind === "extended")) {
     const data=new Int32Array(area); arrays.set(layer.index,data);
@@ -2321,19 +2335,19 @@ function sameMountainSnapshot(a,b) {
   return true;
 }
 function prepareMountainStroke(pending) {
-  if(!hostBridge)throw Error("宿主模块尚未准备好，请稍后落笔。");
+  if(!hostBridge)throw Error(T("宿主模块尚未准备好，请稍后落笔。"));
   pending.terrain=terrain;
   requestAtlas(pending.tilesetId);
-  if(!atlasCache.get(pending.tilesetId)?.image)throw Error("当前地图图块尚未加载，请等待地图显示后再落笔。");
+  if(!atlasCache.get(pending.tilesetId)?.image)throw Error(T("当前地图图块尚未加载，请等待地图显示后再落笔。"));
   if(terrain==="grass")return;
   if(currentTeachingKind()&&taughtChoice!=='default'){
-    if(taughtLoading||taughtContext!==taughtContextKey())throw Error('教学样式正在加载，请稍后再落笔');
-    if(!taughtProfile)throw Error(taughtError||'当前图块集没有可用的教学样式，请刷新或先保存教学');
+    if(taughtLoading||taughtContext!==taughtContextKey())throw Error(T("教学样式正在加载，请稍后再落笔"));
+    if(!taughtProfile)throw Error(taughtError||T("当前图块集没有可用的教学样式，请刷新或先保存教学"));
     pending.taughtProfile=cloneTeaching(taughtProfile);
   }
   pending.snapshot=mountainSnapshot(pending.mapId,Boolean(pending.taughtProfile));
   if(pending.taughtProfile){
-    if(isMultiTerrain(terrain)&&(!Number.isSafeInteger(multiLayers)||multiLayers<2||multiLayers>pending.snapshot.width+pending.snapshot.height))throw Error(`山体层数请填 2～${pending.snapshot.width+pending.snapshot.height} 的整数。`);
+    if(isMultiTerrain(terrain)&&(!Number.isSafeInteger(multiLayers)||multiLayers<2||multiLayers>pending.snapshot.width+pending.snapshot.height))throw Error(T("山体层数请填 2～{v} 的整数。",{v:pending.snapshot.width+pending.snapshot.height}));
     pending.multiLayers=multiLayers;
     const companionKind=companionMultiKind(currentTeachingKind()),companionEntries=taughtProfiles[companionKind]||[];
     const companionId=taughtChoices[companionKind]?.startsWith('saved:')?taughtChoices[companionKind].slice(6):null;
@@ -2349,7 +2363,7 @@ function prepareMountainStroke(pending) {
   else if(terrain==="forestRound"||terrain==="eraseForestRound") pending.snapshot.roundRecognized=RoundForest.recognize(pending.snapshot);
   else if(isMultiTerrain(terrain)) {
     const limit=pending.snapshot.width+pending.snapshot.height;
-    if(!Number.isSafeInteger(multiLayers)||multiLayers<2||multiLayers>limit)throw Error(`山体层数请填 2～${limit} 的整数。`);
+    if(!Number.isSafeInteger(multiLayers)||multiLayers<2||multiLayers>limit)throw Error(T("山体层数请填 2～{limit} 的整数。",{limit:limit}));
     pending.snapshot.multiRecognized=MultiMountain.recognize(pending.snapshot,multiLayers,terrain==="grassMulti");
   }
   else if(isGrassMountainTerrain(terrain)) pending.snapshot.grassContext=GrassMountain.prepare(pending.snapshot);
@@ -2382,19 +2396,19 @@ function drawableChanges(plan) {
 function mountainStrokeStatus() {
   const p=stroke.plan,valid=drawableChanges(p);
   const count=new Set(valid.map(c=>Mountain.key(c.x,c.y))).size;
-  if(p.conflicts.size)return `红色 ${p.conflicts.size} 格跳过：${p.conflicts.values().next().value.message}。\n${count?`松开绘制其余 ${count} 格，不补边、不封口；Esc 取消。`:'没有可画格；可继续移动或按 Esc 取消。'}`;
-  return `${p.feature|| (p.connection?"连接同高度山体":`第 ${p.level} 级高度`)} · 实时图块预览 ${stroke.cells.size} 格 · 修改 ${count} 格\n松开提交整笔 / Esc 取消`;
+  if(p.conflicts.size)return T("红色 {size} 格跳过：{message}。\n{v}",{size:p.conflicts.size,message:p.conflicts.values().next().value.message,v:count?T("松开绘制其余 {count} 格，不补边、不封口；Esc 取消。",{count:count}):T("没有可画格；可继续移动或按 Esc 取消。")});
+  return T("{v} · 实时图块预览 {size} 格 · 修改 {count} 格\n松开提交整笔 / Esc 取消",{v:p.feature|| (p.connection?T("连接同高度山体"):T("第 {level} 级高度",{level:p.level})),size:stroke.cells.size,count:count});
 }
 function commitMountain(pending) {
   const plan=pending.plan;
   if(!sameMountainSnapshot(pending.snapshot,mountainSnapshot(pending.mapId,Boolean(pending.taughtProfile)))) {
-    status("预览期间地图或事件已改变，这一笔已取消，请重新绘制。");return;
+    status(T("预览期间地图或事件已改变，这一笔已取消，请重新绘制。"));return;
   }
   const changes=drawableChanges(plan);
-  if(!changes.length){status(plan.conflicts.size?"红色区域已跳过；没有其余可画格。":"没有需要修改的格子。");return;}
-  const label=plan.feature|| (plan.connection?"连接山体":terrainNames[pending.terrain]);
+  if(!changes.length){status(plan.conflicts.size?T("红色区域已跳过；没有其余可画格。"):T("没有需要修改的格子。"));return;}
+  const label=plan.feature|| (plan.connection?T("连接山体"):T(terrainNames[pending.terrain]));
   nativeTransaction(pending.mapId,changes,label);
-  status(`${label}完成 · ${new Set(changes.map(c=>Mountain.key(c.x,c.y))).size} 格已绘制 · ${plan.conflicts.size} 格跳过 · Ctrl+Z 撤销整笔`);
+  status(T("{label}完成 · {size} 格已绘制 · {size2} 格跳过 · Ctrl+Z 撤销整笔",{label:label,size:new Set(changes.map(c=>Mountain.key(c.x,c.y))).size,size2:plan.conflicts.size}));
   redraw();
 }
 function renderMountain(drawing,info) {
@@ -2419,34 +2433,34 @@ const MAX_DIAMETER = 31;
 let ctxRef = null, panelRefs = null, inputCleanup = null;
 let mode = "idle", hover = null, stroke = null, escapeBinding = null;
 let grassTileId = 384, targetLayerIndex = null, sampledTileset = null;
-let diameter = 1, shape = "circle", insideSide = "right", roadStyle = "yellow", orthogonalMode = false, notice = "先在纯草地上取样。";
-const roadStyleNames = { brown: "棕色沙土", yellow: "浅黄沙地", gray: "灰色砂砾", city: "浅灰城市道路" };
+let diameter = 1, shape = "circle", insideSide = "right", roadStyle = "yellow", orthogonalMode = false, notice = N("先在纯草地上取样。");
+const roadStyleNames = { brown: N("棕色沙土"), yellow: N("浅黄沙地"), gray: N("灰色砂砾"), city: N("浅灰城市道路") };
 const mapSurfaces = new Map(), offsetCache = new Map();
 
 function redraw() { livePreview(); ctxRef?.editor.requestRedraw(); }
 function status(message) {
   if (message !== undefined) notice = message;
   if (!panelRefs) return;
-  panelRefs.mode.textContent = mode === "idle" ? "已停止" : mode === "sample" ? "点击地图取样" : `${terrainNames[terrain]}画笔已启用`;
+  panelRefs.mode.textContent = mode === "idle" ? T("已停止") : mode === "sample" ? T("点击地图取样") : T("{v}画笔已启用",{v:terrainNames[terrain]});
   panelRefs.mode.dataset.mode = mode;
-  panelRefs.paint.textContent = mode === "paint" ? "停止绘画" : "启用当前画笔";
+  panelRefs.paint.textContent = mode === "paint" ? T("停止绘画") : T("启用当前画笔");
   panelRefs.paint.dataset.enabled = String(mode === "paint");
   panelRefs.paint.setAttribute("aria-pressed",String(mode === "paint"));
-  panelRefs.orthogonal.textContent = orthogonalMode ? "正交绘图：开启" : "正交绘图：关闭";
+  panelRefs.orthogonal.textContent = orthogonalMode ? T("正交绘图：开启") : T("正交绘图：关闭");
   panelRefs.orthogonal.dataset.enabled = String(orthogonalMode);
   panelRefs.orthogonal.setAttribute("aria-pressed", String(orthogonalMode));
   const axis = stroke?.ortho?.axis;
-  const direction = stroke?.ortho ? `\n正交：${axis === "x" ? "水平锁定" : axis === "y" ? "垂直锁定" : "等待方向（移动两格）"}` : "";
+  const direction = stroke?.ortho ? T("\n正交：{v}",{v:axis === "x" ? T("水平锁定") : axis === "y" ? T("垂直锁定") : T("等待方向（移动两格）")}) : "";
   panelRefs.status.textContent = stroke
-    ? (stroke.plan ? mountainStrokeStatus() : `预览 ${stroke.cells.size} 格 · 松开提交 / Esc 取消`) + direction
-    : notice;
-  panelRefs.target.textContent = currentTeachingKind() && taughtChoice !== "default" ? `教学样式：${taughtProfile?.name || "加载中"} · ${terrainNames[terrain]}` : isMultiTerrain(terrain) ? `${multiLayers} 层连续岩壁 · 画笔画台面，岩壁向两侧及下方延伸；地图边缘自动裁切` : terrain === "forestRound" || terrain === "eraseForestRound" ? "Outside 圆冠树；三格宽，纵向两格接续，单棵与开口树群可继续画" : terrain === "forestPine" || terrain === "eraseForestPine" ? "Outside 高松树；单棵与连片树群自动接合，擦除可打通洞口" : terrain === "water" || terrain === "eraseWater" ? "第一层画水面与岸线；只允许普通草地" : terrain === "sand" || terrain === "eraseSand" ? `第一层道路 · ${roadStyleNames[roadStyle]}；同样式自动接边` : terrain === "fence" || terrain === "eraseFence" ? "第二层栅栏；沿笔迹方向判断内侧" : isGrassMountainTerrain(terrain) ? "第一层草面 388 · 第二层岩壁；草地山地独立绘制" : terrain !== "grass" ? "第一层填岩面 · 第二层画轮廓" : `图块 ${grassTileId} · ${targetLayerIndex === null ? "当前图层" : `第 ${targetLayerIndex + 1} 层`}`;
+    ? (stroke.plan ? mountainStrokeStatus() : T("预览 {size} 格 · 松开提交 / Esc 取消",{size:stroke.cells.size})) + direction
+    : T(notice);
+  panelRefs.target.textContent = currentTeachingKind() && taughtChoice !== "default" ? T("教学样式：{v} · {v2}",{v:taughtProfile?.name || T("加载中"),v2:terrainNames[terrain]}) : isMultiTerrain(terrain) ? T("{multiLayers} 层连续岩壁 · 画笔画台面，岩壁向两侧及下方延伸；地图边缘自动裁切",{multiLayers:multiLayers}) : terrain === "forestRound" || terrain === "eraseForestRound" ? T("Outside 圆冠树；三格宽，纵向两格接续，单棵与开口树群可继续画") : terrain === "forestPine" || terrain === "eraseForestPine" ? T("Outside 高松树；单棵与连片树群自动接合，擦除可打通洞口") : terrain === "water" || terrain === "eraseWater" ? T("第一层画水面与岸线；只允许普通草地") : terrain === "sand" || terrain === "eraseSand" ? T("第一层道路 · {v}；同样式自动接边",{v:roadStyleNames[roadStyle]}) : terrain === "fence" || terrain === "eraseFence" ? T("第二层栅栏；沿笔迹方向判断内侧") : isGrassMountainTerrain(terrain) ? T("第一层草面 388 · 第二层岩壁；草地山地独立绘制") : terrain !== "grass" ? T("第一层填岩面 · 第二层画轮廓") : T("图块 {grassTileId} · {v}",{grassTileId:grassTileId,v:targetLayerIndex === null ? T("当前图层") : T("第 {v} 层",{v:targetLayerIndex + 1})});
 }
 function report(error) {
   cancelStroke();
   mode = "idle";
   ctxRef.log.error(error);
-  const text = `绘制已停止：${error?.message || String(error)}`;
+  const text = T("绘制已停止：{v}",{v:error?.message || String(error)});
   status(text);
   ctxRef.ui.showToast({ message: text, level: "error", durationMs: 0 });
 }
@@ -2504,19 +2518,19 @@ function cancelStroke(message) {
 }
 function beginStroke(point, pointerId, shiftHeld = false) {
   cancelStroke();
-  if(!hostBridge){status("兼容模块尚未准备好，请稍后落笔。");return;}
+  if(!hostBridge){status(T("兼容模块尚未准备好，请稍后落笔。"));return;}
   const map = ctxRef.map.info(point.mapId);
   const layer = targetLayerIndex ?? ctxRef.editor.activeLayerIndex();
   if (terrain === "grass" && !ctxRef.map.layers(point.mapId).some(l => l.index === layer && l.visible && (l.kind === "native" || l.kind === "extended"))) {
-    throw Error("目标图层不可用，请重新取样。");
+    throw Error(T("目标图层不可用，请重新取样。"));
   }
-  if (terrain === "grass" && sampledTileset !== null && map.tilesetId !== sampledTileset) throw Error("当前地图图块组已改变，请重新取样。");
+  if (terrain === "grass" && sampledTileset !== null && map.tilesetId !== sampledTileset) throw Error(T("当前地图图块组已改变，请重新取样。"));
   stroke = { mapId: point.mapId, layer, tileId: grassTileId, size: ["fence","eraseFence"].includes(terrain)?1:diameter, form: shape, insideSide, roadStyle, path: [],
     width: map.width, height: map.height, tilesetId: map.tilesetId,
     pointerId, origin: point, cells: new Map(), last: null };
   prepareMountainStroke(stroke);
   // 只在拖动预览期间占用 Esc，防止宿主快捷键先截获；结束后立即归还。
-  escapeBinding = ctxRef.ui.registerShortcut("Escape", () => cancelStroke("已取消这一笔，可以继续绘制。"));
+  escapeBinding = ctxRef.ui.registerShortcut("Escape", () => cancelStroke(T("已取消这一笔，可以继续绘制。")));
   extendStroke(point, shiftHeld);
 }
 function extendStroke(point, shiftHeld = false) {
@@ -2547,18 +2561,18 @@ function commitStroke() {
   const map = ctxRef.map.info(pending.mapId);
   if (ctxRef.editor.activeMapId() !== pending.mapId || !map || map.width !== pending.width ||
       map.height !== pending.height || map.tilesetId !== pending.tilesetId) {
-    status("地图已改变，这一笔已取消。"); return;
+    status(T("地图已改变，这一笔已取消。")); return;
   }
   if (pending.terrain !== "grass") { commitMountain(pending); return; }
   if (!ctxRef.map.layers(pending.mapId).some(l => l.index === pending.layer && l.visible)) {
-    status("目标图层已改变，这一笔已取消。"); return;
+    status(T("目标图层已改变，这一笔已取消。")); return;
   }
   const changes = [...pending.cells.values()].map(c => ({ ...c,
     old: ctxRef.map.readTile(pending.mapId, pending.layer, c.x, c.y) }))
     .filter(c => c.old !== pending.tileId);
-  if (!changes.length) { status("这些格子已经是所选图块，没有新增修改。"); return; }
-  nativeTransaction(pending.mapId,changes.map(c=>({...c,layer:pending.layer,value:pending.tileId})),"程序化草地");
-  status(`已写入 ${changes.length} 格 · Ctrl+Z 撤销整笔`);
+  if (!changes.length) { status(T("这些格子已经是所选图块，没有新增修改。")); return; }
+  nativeTransaction(pending.mapId,changes.map(c=>({...c,layer:pending.layer,value:pending.tileId})),T("程序化草地"));
+  status(T("已写入 {length} 格 · Ctrl+Z 撤销整笔",{length:changes.length}));
   redraw();
 }
 
@@ -2612,15 +2626,15 @@ function sampleAt(point) {
     const id = ctxRef.map.readTile(point.mapId, l.index, point.x, point.y);
     if (!id) continue;
     // 本阶段是普通草地图块画笔；自动元件需要另行实现邻接重算。
-    if (id < 384) { status("这里是自动元件，请选择普通草地图块取样。"); return; }
+    if (id < 384) { status(T("这里是自动元件，请选择普通草地图块取样。")); return; }
     terrain = "grass"; if (panelRefs) panelRefs.syncTerrain();
     grassTileId = id; targetLayerIndex = l.index;
     sampledTileset = ctxRef.map.info(point.mapId).tilesetId;
     mode = "paint";
     if (panelRefs) panelRefs.tile.value = String(id);
-    status("取样成功。拖动预览，松开落笔。"); redraw(); return;
+    status(T("取样成功。拖动预览，松开落笔。")); redraw(); return;
   }
-  status("这一格没有可取样图块，请点击纯草地。");
+  status(T("这一格没有可取样图块，请点击纯草地。"));
 }
 
 function renderMask(drawing, info, cells, fill, outline) {
@@ -2671,33 +2685,33 @@ function renderPanel(host) {
     .mimi-pg-root .state{padding:8px;border-radius:5px;background:var(--bg-secondary,#202934)}
     .mimi-pg-root .state[data-mode=paint]{border-left:3px solid #69da9b}
     .mimi-pg-root .status{min-height:48px;margin-top:12px;white-space:pre-wrap}
-    </style><h3>程序化绘图 · v1.1.0</h3>
-    <button type="button" data-ref="teaching">图块教学 · 山体 / 草地山体 / 道路 / 森林</button>
+    </style><h3>${T("程序化绘图 · v1.1.0")}</h3>
+    <button type="button" data-ref="teaching">${T("图块教学 · 山体 / 草地山体 / 道路 / 森林")}</button>
     <div class="state" data-ref="mode"></div>
-    <div class="type-title">类型选择</div>
-    <div class="type-row" role="group" aria-label="类型选择">
-      <button type="button" data-type="grass">草地</button>
-      <button type="button" data-type="mountain">山体</button>
-      <button type="button" data-type="grassMountain">草地山地</button>
-      <button type="button" data-type="water">水坑</button>
-      <button type="button" data-type="sand">道路</button>
-      <button type="button" data-type="fence">栅栏</button>
-      <button type="button" data-type="forest">森林</button>
+    <div class="type-title">${T("类型选择")}</div>
+    <div class="type-row" role="group" aria-label="${T("类型选择")}">
+      <button type="button" data-type="grass">${T("草地")}</button>
+      <button type="button" data-type="mountain">${T("山体")}</button>
+      <button type="button" data-type="grassMountain">${T("草地山地")}</button>
+      <button type="button" data-type="water">${T("水坑")}</button>
+      <button type="button" data-type="sand">${T("道路")}</button>
+      <button type="button" data-type="fence">${T("栅栏")}</button>
+      <button type="button" data-type="forest">${T("森林")}</button>
     </div>
     <div class="type-divider"></div>
-    <label>绘制方式<select data-ref="terrain" aria-label="绘制方式"></select></label>
-    <div data-ref="taught-row" style="display:none"><label>教学样式<select data-ref="taught-style" aria-label="教学样式"><option value="default">默认岩山（原样式）</option></select></label><button type="button" data-ref="taught-refresh">刷新教学样式</button><div class="note" data-ref="taught-hint"></div></div>
-    <label data-ref="layers-row">山体层数<input data-ref="layers" aria-label="山体层数" type="number" min="2" step="1" value="${multiLayers}"></label>
-    <label data-ref="style-row">样式<select data-ref="style" aria-label="道路样式"><option value="brown">棕色沙土</option><option value="yellow">浅黄沙地</option><option value="gray">灰色砂砾</option><option value="city">浅灰城市道路</option></select></label>
-    <label>笔刷直径（格）<input data-ref="size" type="number" min="1" max="31" step="1" value="${diameter}"></label>
-    <label>笔刷形状<select data-ref="shape"><option value="circle">圆形</option><option value="square">方形</option></select></label>
-    <label data-ref="inside-row">栅栏内侧<select data-ref="inside"><option value="right">沿笔迹右侧</option><option value="left">沿笔迹左侧</option></select></label>
-    <label data-ref="tile-row"><span data-ref="tile-label">草地图块 ID</span><input data-ref="tile" type="number" min="384" max="32767" step="1" value="${grassTileId}"></label>
+    <label>${T("绘制方式")}<select data-ref="terrain" aria-label="${T("绘制方式")}"></select></label>
+    <div data-ref="taught-row" style="display:none"><label>${T("教学样式")}<select data-ref="taught-style" aria-label="${T("教学样式")}"><option value="default">${T("默认岩山（原样式）")}</option></select></label><button type="button" data-ref="taught-refresh">${T("刷新教学样式")}</button><div class="note" data-ref="taught-hint"></div></div>
+    <label data-ref="layers-row">${T("山体层数")}<input data-ref="layers" aria-label="${T("山体层数")}" type="number" min="2" step="1" value="${multiLayers}"></label>
+    <label data-ref="style-row">${T("样式")}<select data-ref="style" aria-label="${T("道路样式")}"><option value="brown">${T("棕色沙土")}</option><option value="yellow">${T("浅黄沙地")}</option><option value="gray">${T("灰色砂砾")}</option><option value="city">${T("浅灰城市道路")}</option></select></label>
+    <label>${T("笔刷直径（格）")}<input data-ref="size" type="number" min="1" max="31" step="1" value="${diameter}"></label>
+    <label>${T("笔刷形状")}<select data-ref="shape"><option value="circle">${T("圆形")}</option><option value="square">${T("方形")}</option></select></label>
+    <label data-ref="inside-row">${T("栅栏内侧")}<select data-ref="inside"><option value="right">${T("沿笔迹右侧")}</option><option value="left">${T("沿笔迹左侧")}</option></select></label>
+    <label data-ref="tile-row"><span data-ref="tile-label">${T("草地图块 ID")}</span><input data-ref="tile" type="number" min="384" max="32767" step="1" value="${grassTileId}"></label>
     <div class="note" data-ref="target"></div>
-    <button data-ref="sample">取样草地</button>
-    <button type="button" data-ref="orthogonal" aria-pressed="false">正交绘图：关闭</button>
-    <button class="primary" data-ref="paint" aria-pressed="false">启用当前画笔</button>
-    <div class="note">按下即显示实际图块，拖动连续更新<br>正交按钮开启后无需按键；关闭时可按住 Shift 临时正交<br>移动两格后锁定水平或垂直方向<br>道路根据邻格自动接边，建议至少 3 格宽<br>栅栏始终 1 格宽；顺时针围边选“右侧”<br>森林可选高松林或圆冠林，支持接续与擦除<br>叠加高台升一级；扩展高台保持原高度<br>下挖从平坦岩面起笔；水坑只在普通草地绘制<br>红色：跳过该格，其余照常绘制<br>松开：提交整笔　Esc：取消预览<br>Ctrl+Z：撤销已提交的一笔</div>
+    <button data-ref="sample">${T("取样草地")}</button>
+    <button type="button" data-ref="orthogonal" aria-pressed="false">${T("正交绘图：关闭")}</button>
+    <button class="primary" data-ref="paint" aria-pressed="false">${T("启用当前画笔")}</button>
+    <div class="note">${T("按下即显示实际图块，拖动连续更新")}<br>${T("正交按钮开启后无需按键；关闭时可按住 Shift 临时正交")}<br>${T("移动两格后锁定水平或垂直方向")}<br>${T("道路根据邻格自动接边，建议至少 3 格宽")}<br>${T("栅栏始终 1 格宽；顺时针围边选“右侧”")}<br>${T("森林可选高松林或圆冠林，支持接续与擦除")}<br>${T("叠加高台升一级；扩展高台保持原高度")}<br>${T("下挖从平坦岩面起笔；水坑只在普通草地绘制")}<br>${T("红色：跳过该格，其余照常绘制")}<br>${T("松开：提交整笔　Esc：取消预览")}<br>${T("Ctrl+Z：撤销已提交的一笔")}</div>
     <div class="status" data-ref="status" role="status"></div>`;
   host.appendChild(root);
   const refs = { root };
@@ -2709,16 +2723,16 @@ function renderPanel(host) {
     ["forestPine", "eraseForestPine", "forestRound", "eraseForestRound"].includes(value) ? "forest" :
     ["grassMulti", "grassMountain", "grassUpper", "grassExpand", "grassDig", "grassEraseUpper", "grassErase"].includes(value) ? "grassMountain" : "mountain";
   const choices = {
-    grass: [["grass", "绘制草地"]],
-    mountain: [["mountain", "单层山体"], ["multi", "多层山体"], ["upper", "叠加高台"], ["expand", "扩展高台"],
-      ["dig", "下挖一层"], ["eraseUpper", "擦除高台"], ["erase", "擦除底座"]],
-    grassMountain: [["grassMountain", "单层草地山地"], ["grassMulti", "多层山体"], ["grassUpper", "叠加高台"], ["grassExpand", "扩展高台"],
-      ["grassDig", "下挖一层"], ["grassEraseUpper", "擦除高台"], ["grassErase", "擦除底座"]],
-    water: [["water", "绘制水坑"], ["eraseWater", "擦除水坑"]],
-    sand: [["sand", "绘制道路"], ["eraseSand", "擦除道路"]],
-    fence: [["fence", "绘制栅栏"], ["eraseFence", "擦除栅栏"]],
-    forest: [["forestPine", "绘制高松林"], ["eraseForestPine", "擦除高松林"],
-      ["forestRound", "绘制圆冠林"], ["eraseForestRound", "擦除圆冠林"]]
+    grass: [["grass", T("绘制草地")]],
+    mountain: [["mountain", T("单层山体")], ["multi", T("多层山体")], ["upper", T("叠加高台")], ["expand", T("扩展高台")],
+      ["dig", T("下挖一层")], ["eraseUpper", T("擦除高台")], ["erase", T("擦除底座")]],
+    grassMountain: [["grassMountain", T("单层草地山地")], ["grassMulti", T("多层山体")], ["grassUpper", T("叠加高台")], ["grassExpand", T("扩展高台")],
+      ["grassDig", T("下挖一层")], ["grassEraseUpper", T("擦除高台")], ["grassErase", T("擦除底座")]],
+    water: [["water", T("绘制水坑")], ["eraseWater", T("擦除水坑")]],
+    sand: [["sand", T("绘制道路")], ["eraseSand", T("擦除道路")]],
+    fence: [["fence", T("绘制栅栏")], ["eraseFence", T("擦除栅栏")]],
+    forest: [["forestPine", T("绘制高松林")], ["eraseForestPine", T("擦除高松林")],
+      ["forestRound", T("绘制圆冠林")], ["eraseForestRound", T("擦除圆冠林")]]
   };
   const remembered = { grass: "grass", mountain: "mountain", grassMountain: "grassMountain", water: "water", sand: "sand", fence: "fence", forest: "forestPine" };
   remembered[categoryFor(terrain)] = terrain;
@@ -2741,7 +2755,7 @@ function renderPanel(host) {
     refs.shape.closest("label").style.display = isFence ? "none" : "grid";
     refs["tile-row"].style.display = isFence || category === "forest" ? "none" : "grid";
     refs.sample.style.display = isFence || category === "forest" ? "none" : "block";
-    refs["tile-label"].textContent = category === "sand" ? "擦除回填 ID" : "草地图块 ID";
+    refs["tile-label"].textContent = category === "sand" ? T("擦除回填 ID") : T("草地图块 ID");
     remembered[category] = terrain;
     if(panelRefs===refs)syncTaughtStyles();
   };
@@ -2763,29 +2777,29 @@ function renderPanel(host) {
     cancelStroke();
     terrain = remembered[button.dataset.type];
     refs.syncTerrain(); applyTerrainSettings();
-    status(terrain === "grass" ? "草地画笔。" : "Outside 地形画笔；按下看图块，松开提交。"); redraw();
+    status(terrain === "grass" ? T("草地画笔。") : T("Outside 地形画笔；按下看图块，松开提交。")); redraw();
   });
   listen(refs.terrain, "change", () => {
     cancelStroke(); terrain = refs.terrain.value;
     refs.syncTerrain(); applyTerrainSettings();
-    status(terrain === "grass" ? "草地画笔。" : "Outside 地形画笔；按下看图块，松开提交。"); redraw();
+    status(terrain === "grass" ? T("草地画笔。") : T("Outside 地形画笔；按下看图块，松开提交。")); redraw();
   });
   listen(refs.layers, "input", () => {
     cancelStroke();multiLayers=Number(refs.layers.value);
-    status(Number.isSafeInteger(multiLayers)&&multiLayers>=2 ? `连续岩壁设为 ${multiLayers} 层。` : "山体层数请填不小于 2 的整数。");redraw();
+    status(Number.isSafeInteger(multiLayers)&&multiLayers>=2 ? T("连续岩壁设为 {multiLayers} 层。",{multiLayers:multiLayers}) : T("山体层数请填不小于 2 的整数。"));redraw();
   });
   const updateSize = normalize => {
     cancelStroke();
     const number = Number(refs.size.value);
     diameter = Number.isFinite(number) && number >= 1 ? Math.min(MAX_DIAMETER, Math.round(number)) : diameter;
     if (normalize || refs.size.value !== "") refs.size.value = String(diameter);
-    status(`笔刷直径 ${diameter} 格。`); redraw();
+    status(T("笔刷直径 {diameter} 格。",{diameter:diameter})); redraw();
   };
   listen(refs.size, "input", () => updateSize(false));
   listen(refs.size, "change", () => updateSize(true));
   listen(refs.shape, "change", () => { cancelStroke(); shape = refs.shape.value === "square" ? "square" : "circle"; status(); redraw(); });
-  listen(refs.style, "change", () => { cancelStroke(); roadStyle = refs.style.value; status(`已选择道路样式：${refs.style.selectedOptions[0].textContent}。`); redraw(); });
-  listen(refs.inside, "change", () => { cancelStroke(); insideSide = refs.inside.value === "left" ? "left" : "right"; status("已设置栅栏内侧方向。"); redraw(); });
+  listen(refs.style, "change", () => { cancelStroke(); roadStyle = refs.style.value; status(T("已选择道路样式：{textContent}。",{textContent:refs.style.selectedOptions[0].textContent})); redraw(); });
+  listen(refs.inside, "change", () => { cancelStroke(); insideSide = refs.inside.value === "left" ? "left" : "right"; status(T("已设置栅栏内侧方向。")); redraw(); });
   const updateTile = normalize => {
     cancelStroke();
     const id = Number(refs.tile.value);
@@ -2795,16 +2809,16 @@ function renderPanel(host) {
   };
   listen(refs.tile, "input", () => updateTile(false));
   listen(refs.tile, "change", () => updateTile(true));
-  listen(refs.sample, "click", () => { cancelStroke(); mode = "sample"; status("请点击地图上的纯草地。"); redraw(); });
+  listen(refs.sample, "click", () => { cancelStroke(); mode = "sample"; status(T("请点击地图上的纯草地。")); redraw(); });
   listen(refs.orthogonal, "click", () => {
     cancelStroke(); orthogonalMode = !orthogonalMode;
-    status(orthogonalMode ? "正交绘图已开启：落笔后沿水平或垂直方向绘制。" : "正交绘图已关闭；按住 Shift 可临时正交绘图。");
+    status(orthogonalMode ? T("正交绘图已开启：落笔后沿水平或垂直方向绘制。") : T("正交绘图已关闭；按住 Shift 可临时正交绘图。"));
     redraw();
   });
   listen(refs.paint, "click", () => {
     cancelStroke();
-    if (mode === "paint") { mode = "idle"; hover = null; status("已停止，恢复编辑器原生画笔。"); }
-    else { mode = "paint"; targetLayerIndex ??= ctxRef.editor.activeLayerIndex(); status("按下即预览，松开提交整笔。"); }
+    if (mode === "paint") { mode = "idle"; hover = null; status(T("已停止，恢复编辑器原生画笔。")); }
+    else { mode = "paint"; targetLayerIndex ??= ctxRef.editor.activeLayerIndex(); status(T("按下即预览，松开提交整笔。")); }
     redraw();
   });
   listen(root.querySelector('[data-ref="teaching"]'), "click", () => tileTeaching.open());
@@ -2818,9 +2832,9 @@ function renderPanel(host) {
 
 export function activate(ctx) {
   ctxRef = ctx;
-  tileTeaching=createTileTeaching(ctx,(mask,width,height)=>combine([mask],width,height),()=>{cancelStroke();mode="idle";hover=null;status("已进入图块教学，地图画笔已停止。");redraw();},loadNativeTeachingImage,()=>{void refreshTaughtStyles(true);},{Mountain,Surface,Forest,RoundForest,Features,MultiMountain});
+  tileTeaching=createTileTeaching(ctx,(mask,width,height)=>combine([mask],width,height),()=>{cancelStroke();mode="idle";hover=null;status(T("已进入图块教学，地图画笔已停止。"));redraw();},loadNativeTeachingImage,()=>{void refreshTaughtStyles(true);},{Mountain,Surface,Forest,RoundForest,Features,MultiMountain});
   const activation=++hostEpoch;
-  hostReady=loadHostBridge(ctx).then(bridge=>{if(activation!==hostEpoch||ctxRef!==ctx)return;hostBridge=bridge;const info=ctx.map.info(ctx.editor.activeMapId());if(info)requestAtlas(info.tilesetId);status("已就绪：原生跨层撤销＋即时图块预览。");redraw();}).catch(error=>{if(activation===hostEpoch&&ctxRef===ctx)report(error);});
+  loadHostBridge().then(bridge=>{if(activation!==hostEpoch||ctxRef!==ctx)return;hostBridge=bridge;const info=ctx.map.info(ctx.editor.activeMapId());if(info)requestAtlas(info.tilesetId);status(T("已就绪：原生跨层撤销＋即时图块预览。"));redraw();}).catch(error=>{if(activation===hostEpoch&&ctxRef===ctx)report(error);});
   const activeInfo=ctx.map.info(ctx.editor.activeMapId());if(activeInfo)requestAtlas(activeInfo.tilesetId);
   ctx.ui.registerOverlay({ id: `${MOD_ID}.input-surface`, zOrder: 10, render: renderOverlay });
   const onDown = ev => {
@@ -2833,7 +2847,7 @@ export function activate(ctx) {
   };
   const onMove = ev => {
     if (mode === "idle" || (stroke && ev.pointerId !== stroke.pointerId)) return;
-    if (stroke && ((ev.buttons & 1) === 0 || ctx.editor.activeMapId() !== stroke.mapId)) cancelStroke("操作已中断，预览已取消。");
+    if (stroke && ((ev.buttons & 1) === 0 || ctx.editor.activeMapId() !== stroke.mapId)) cancelStroke(T("操作已中断，预览已取消。"));
     const point = mapPointer(ev);
     if (stroke) {
       if (!point) { stroke.last = null; stroke.ortho = null; }
@@ -2843,17 +2857,17 @@ export function activate(ctx) {
   };
   const onUp = ev => {
     if (!stroke || ev.pointerId !== stroke.pointerId || (ev.type === "pointerup" && ev.button !== 0)) return;
-    if (ev.type === "pointercancel") { cancelStroke("操作已中断，预览已取消。"); return; }
+    if (ev.type === "pointercancel") { cancelStroke(T("操作已中断，预览已取消。")); return; }
     try {
       const point = mapPointer(ev);
       if (point?.mapId === stroke.mapId) { ownEvent(ev); extendStroke(point, ev.shiftKey); }
       commitStroke();
     } catch (error) { report(error); }
   };
-  const onBlur = () => { if (stroke) cancelStroke("窗口失焦，预览已取消。"); hover = null; redraw(); };
+  const onBlur = () => { if (stroke) cancelStroke(T("窗口失焦，预览已取消。")); hover = null; redraw(); };
   const onKey = ev => {
     if (ev.key !== "Escape" || !stroke) return;
-    ownEvent(ev); cancelStroke("已取消这一笔，可以继续绘制。");
+    ownEvent(ev); cancelStroke(T("已取消这一笔，可以继续绘制。"));
   };
   const onVisibility = () => { if (document.hidden) onBlur(); };
   const listeners = [["pointerdown", onDown], ["pointermove", onMove], ["pointerup", onUp],
@@ -2861,10 +2875,11 @@ export function activate(ctx) {
   for (const [event, fn] of listeners) window.addEventListener(event, fn, true);
   document.addEventListener("visibilitychange", onVisibility);
   const subscriptions = [
-    ctx.bus.on("map.unloaded", e => { if (stroke?.mapId === e.mapId) cancelStroke("地图已关闭，预览已取消。"); mapSurfaces.delete(e.mapId); }),
-    ctx.bus.on("viewport.changed", e => { if (stroke?.mapId === e.mapId) cancelStroke("视口已改变，预览已取消。"); hover = null; mapSurfaces.delete(e.mapId); redraw(); }),
-    ctx.bus.on("save.before", () => { if (stroke) cancelStroke("保存前已取消尚未提交的预览。"); }),
-    ctx.bus.on("tool.activated", () => { cancelStroke(); mode = "idle"; hover = null; status("已切换到编辑器工具。"); redraw(); })
+    ctx.bus.on("map.unloaded", e => { if (stroke?.mapId === e.mapId) cancelStroke(T("地图已关闭，预览已取消。")); mapSurfaces.delete(e.mapId); }),
+    ctx.bus.on("viewport.changed", e => { if (stroke?.mapId === e.mapId) cancelStroke(T("视口已改变，预览已取消。")); hover = null; mapSurfaces.delete(e.mapId); redraw(); }),
+    ctx.bus.on("tileset.changed", e => { if (e.reason !== "selected") atlasCache.delete(e.tilesetId); }),
+    ctx.bus.on("save.before", () => { if (stroke) cancelStroke(T("保存前已取消尚未提交的预览。")); }),
+    ctx.bus.on("tool.activated", () => { cancelStroke(); mode = "idle"; hover = null; status(T("已切换到编辑器工具。")); redraw(); })
   ];
   inputCleanup = () => {
     cancelStroke();
@@ -2873,10 +2888,10 @@ export function activate(ctx) {
     subscriptions.forEach(s => s.dispose()); mapSurfaces.clear(); inputCleanup = null;
   };
   ctx.lifecycle.onDeactivate(() => inputCleanup?.());
-  ctx.ui.registerContextMenuItem({ context: "map-tile", label: "程序化绘图：取样此格为草地",
+  ctx.ui.registerContextMenuItem({ context: "map-tile", label: T("程序化绘图：取样此格为草地"),
     handler(e) { if (e.mapId != null && e.tileX != null && e.tileY != null) sampleAt({ mapId: e.mapId, x: e.tileX, y: e.tileY }); }
   });
-  ctx.ui.registerPanel({ id: PANEL_ID, title: "程序化绘图", defaultPosition: "left", defaultSize: { width: 330, height: 680 }, render: renderPanel });
+  ctx.ui.registerPanel({ id: PANEL_ID, title: T("程序化绘图"), defaultPosition: "left", defaultSize: { width: 330, height: 680 }, render: host => { let cleanup = renderPanel(host); const sub = ctx.i18n?.onChanged?.(() => { cleanup?.(); host.replaceChildren(); cleanup = renderPanel(host); status(); syncTaughtStyles(); redraw(); }); return () => { sub?.dispose(); cleanup?.(); }; } });
   ctx.ui.openPanel(PANEL_ID); redraw();void refreshTaughtStyles(true);
 }
 export function deactivate() {

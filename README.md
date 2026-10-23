@@ -34,9 +34,11 @@ Version 1.1.0 also adds grass-topped cliffs, configurable multi-level cliffs, ta
 
 ## Compatibility
 
-**Tested with Maker Studio 1.7.1.**
+**Works with Maker Studio 1.9.0** (also 1.7.1).
 
-This release intentionally refuses to draw on a different Maker Studio version because it relies on 1.7.1 host internals for safe cross-layer transactions and native undo behavior.
+Safe cross-layer undo needs the editor's own batch transaction, which the public Mod API does not expose yet. The mod finds it among the editor's loaded modules by its shape instead of by version number or file name, and refuses to draw if it cannot find it.
+
+The interface follows the editor language (View → Language): English, Spanish, or the original Chinese for `zh` locales; any other locale falls back to English. Run `node check-i18n.mjs` after changing UI text.
 
 Built-in tile templates target the **vanilla Pokémon Essentials `Outside` tileset layout**. Teaching profiles can map supported terrain types to other regular-tile layouts. Water and fences still use their built-in Outside layouts.
 

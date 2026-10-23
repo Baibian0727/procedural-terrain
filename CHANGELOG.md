@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0
+
+- Maker Studio 1.9.0 support: removed the hard 1.7.1 version check; the cross-layer undo transaction is now located by its interface, not by hashed file names. Tileset previews load through the tileset image command instead of renderer internals.
+- English and Spanish translations (`i18n.js`); the UI follows the editor language and re-renders when it changes.
+
 ## 1.1.0 (release candidate)
 
 See [bilingual release notes](RELEASE_NOTES.md) for the reviewed feature list and compatibility details.
